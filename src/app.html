@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html ng-app="tradency.mobile">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Tradency Mobile POC</title>
+
+    <!-- Style -->
+    <link rel="stylesheet" href="../node_modules/foundation-sites/dist/foundation.css">
+    <link rel="stylesheet" href="../node_modules/font-awesome/css/font-awesome.css">
+
+    <!-- build:css css/app.css -->
+    <link rel="stylesheet" href="assets/scss/global.css">
+    <link rel="stylesheet" href="components/top-bar/top-bar.css">
+    <link rel="stylesheet" href="components/menu-bar/menu-bar.css">
+    <link rel="stylesheet" href="states/trading/rates/rates.css">
+    <link rel="stylesheet" href="components/symbol-list/symbol-list.css">
+    <!-- endbuild -->
+
+    <!-- Vendor -->
+    <script src="../node_modules/angular/angular.js"></script>
+    <link rel="stylesheet" href="../node_modules/foundation-sites/dist/foundation.js">
+    <script src="../node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="../node_modules/ngstorage/ngStorage.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/ms-signalr-client/jquery.signalr-2.2.0.js"></script>
+    <script src="../node_modules/angular-signalr-hub/signalr-hub.js"></script>
+    <script src="http://srdev.tradency.com:8081/signalr/hubs"></script>
+    <script src="../node_modules/underscore/underscore.js"></script>
+
+    <!-- build:js js/app.js -->
+    <!------ App assets ------>
+    <script src="app.js"></script>
+
+    <!-- Components -->
+    <script src="components/top-bar/top-bar.controller.js"></script>
+    <script src="components/top-bar/top-bar.directive.js"></script>
+
+    <script src="components/menu-bar/menu-bar.controller.js"></script>
+    <script src="components/menu-bar/menu-bar.directive.js"></script>
+    <script src="components/symbol-list/symbol-list.directive.js"></script>
+
+    <!-- Modules -->
+    <script src="states/trading/trading.controller.js"></script>
+    <script src="states/trading/trading.js"></script>
+
+    <script src="states/trading/rates/rates.controller.js"></script>
+    <script src="states/trading/rates/rates.service.js"></script>
+    <script src="states/trading/rates/rates.js"></script>
+
+    <!-- Common -->
+    <script src="common/services/auth.service.js"></script>
+    <script src="common/services/userdata.service.js"></script>
+    <script src="common/config/constant.js"></script>
+    <script src="common/config/config.js"></script>
+    <script src="states/default.js"></script>
+    <script src="common/services/signalr.service.js"></script>
+    <!-- endbuild -->
+
+</head>
+<body>
+
+    <header>
+        <top-bar></top-bar>
+        <menu-bar></menu-bar>
+    </header>
+
+    <div ui-view></div>
+
+</body>
+</html>

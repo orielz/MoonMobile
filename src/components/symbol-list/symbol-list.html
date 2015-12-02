@@ -1,0 +1,41 @@
+<ul class="symbol-list">
+    <li ng-repeat="item in model" class="row">
+
+        <div class="small-12 columns padding-top-quarter">
+
+            <div class="symbol">
+
+                <div class="name padding-left padding-top padding-bottom">{{::item.InstrumentName}}</div>
+
+                <span class="pull-right padding-top-half">
+                    <button ng-class="{'up':item.bidDiff < 0,'down':item.bidDiff > 0}" class="button padding-half">
+                        <div class="title">
+                            <i class="fa fa-arrow-down"></i>
+                            <span class="text">Sell</span>
+                        </div>
+
+                        <div class="pips">
+                            {{item.Bid}}
+                        </div>
+                    </button>
+                </span>
+
+                <span class="pull-right padding-top-half">
+                    <button ng-class="{'up':item.askDiff < 0,'down':item.askDiff > 0}" class="button padding-half">
+                        <span class="title">
+                            <i class="fa fa-arrow-up"></i>
+                            <span class="text">Buy</span>
+                        </span>
+
+                        <div class="pips">
+                            {{item.Ask}}
+                        </div>
+                    </button>
+                </span>
+
+            </div>
+
+        </div>
+
+    </li>
+</ul>

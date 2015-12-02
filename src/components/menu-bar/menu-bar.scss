@@ -1,0 +1,37 @@
+.menu-bar {
+  background-color: #474A5B;
+
+  li {
+    background-color: #474A5B;
+
+    a {
+      &.active, &:hover {
+        background-color: #393B48;
+      }
+      color: #9DA1BC;
+    }
+
+  }
+}
+
+.second-bar {
+  ul {
+    background-color: white;
+
+    li {
+      background-color: white;
+
+      &.active, &:hover {
+        border-bottom: 2px solid #E24B26;
+      }
+
+      a {
+        &.active, &:hover {
+          color: #666A76;
+        }
+        color: #9FA3AE;
+      }
+
+    }
+  }
+}
