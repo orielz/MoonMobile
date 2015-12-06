@@ -1,0 +1,63 @@
+<div class="row summary padding-left padding-bottom-half">
+    <div class="small-3 columns">
+        <div>Total Positions</div>
+        <div><strong>{{model.length}}</strong></div>
+    </div>
+    <div class="small-3 columns">
+        <div>Total Pips</div>
+        <div><strong>184</strong></div>
+    </div>
+    <div class="small-4 columns pull-right">
+            <span class="pull-right">
+                <a href="#" class="button">
+                    <i class="fa fa-plus-square"></i>
+                    New Order
+                </a>
+            </span>
+    </div>
+</div>
+
+<ul class="positions-list">
+    <li ng-repeat="item in model" class="row padding-right padding-left padding-top-half">
+
+        <div class="columns small-12 white-bg">
+            <div class="row">
+                <div class="small-10 columns padding-top-half">
+
+                    <div class="name-container">
+                        <i class="fa fa-buysellads"></i>
+                        <span class="name">{{::item.SystemName}}</span>
+                    </div>
+                    <div class="peer-container">
+                        <span class="peer">{{::item.InstrumentName}}</span>
+                        <span class="type">{{::item.TradePositionTypeName}}</span>
+                    </div>
+
+
+                    <div class="row padding-top-half">
+                        <div class="small-4 columns">
+                            <div class="title">Ticket ID</div>
+                            <div class="text">{{::item.TicketID}}</div>
+                        </div>
+                        <div class="small-4 columns">
+                            <div class="title">Open Price</div>
+                            <div class="text">{{::item.OpenPrice}}</div>
+                        </div>
+                        <div class="small-4 columns end">
+                            <div class="title">Pips</div>
+                            <div class="text green">{{item.Pips}}</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="small-2 columns padding-top buttons-container">
+                    <div><a href="#" class="button"><i class="fa fa-wrench"></i></a></div>
+                    <div><a href="#" class="button"><i class="fa fa-times"></i></a></div>
+                </div>
+            </div>
+        </div>
+
+
+    </li>
+</ul>

@@ -3,10 +3,10 @@
  */
 (function(app) {
 
-    app.controller('MenuBarController', [MenuBar]);
+    app.controller('MenuBarController', ['$scope', '$state', MenuBar]);
 
-    function MenuBar() {
-
+    function MenuBar($scope, $state) {
+        $scope.$state = $state;
     }
 
 })(angular.module('tradency.mobile'));

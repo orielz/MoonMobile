@@ -6,9 +6,9 @@
 
     var serviceId = 'ratesService';
 
-    app.factory(serviceId, ['$localStorage','$http', '$q', ratesService]);
+    app.factory(serviceId, ['$localStorage','$http', '$q', 'constants', ratesService]);
 
-    function ratesService($localStorage, $http, $q) {
+    function ratesService($localStorage, $http, $q, constants) {
 
         return {
             getRates: getRates
@@ -17,8 +17,9 @@
         function getRates() {
 
             var accountId = $localStorage.accountId;
+            var getRatesUrl = constants.DEV.getRatesUrl;
 
-            return $http.post('http://mws.tradency.com/Rates/GetRates', {AccountID: accountId});
+            return $http.post(getRatesUrl, {AccountID: accountId});
         }
 
     }

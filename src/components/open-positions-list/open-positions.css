@@ -1,0 +1,17 @@
+.positions-list {
+  list-style-type: none;
+  margin: 0; }
+  .positions-list li .white-bg {
+    background-color: #ffffff; }
+    .positions-list li .white-bg .name-container .name {
+      color: #3E82E7;
+      font-size: 17px;
+      font-weight: bold; }
+    .positions-list li .white-bg .peer-container .peer {
+      font-weight: bold; }
+    .positions-list li .white-bg .text {
+      font-weight: bold; }
+      .positions-list li .white-bg .text.green {
+        color: #5C9A2F; }
+    .positions-list li .white-bg .buttons-container i {
+      color: #4B5161; }

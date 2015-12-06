@@ -36,9 +36,9 @@
                     $timeout(function () {
 
                         if (model)
-                            $.extend(model, pushModel);
-                        else
-                            scope.model.push(pushModel);
+                            $.extend(model, pushModel); // Update an existing model
+                        else if (scope.model)
+                            scope.model.push(pushModel); // Add new model
 
                     }, 0);
 

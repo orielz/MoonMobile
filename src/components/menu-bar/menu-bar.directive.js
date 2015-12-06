@@ -3,17 +3,23 @@
  */
 (function(app) {
 
-    app.directive('menuBar', ['$rootScope', MenuBar]);
+    app.directive('menuBar', ['$state', MenuBar]);
 
-    function MenuBar($rootScope) {
+    function MenuBar($state) {
 
         return {
             restrict: 'E',
             templateUrl: 'components/menu-bar/menu-bar.html',
             scope: {},
             controller: 'MenuBarController',
-            controllerAs: 'MenuBar'
+            controllerAs: 'MenuBar',
+            link: link
         };
+
+        function link(scope, iElement, attr, controller) {
+            controller.$state = $state;
+        }
+
 
     }
 

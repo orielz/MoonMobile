@@ -1,0 +1,42 @@
+.positions-list {
+  list-style-type: none;
+  margin: 0;
+
+  li {
+
+    .white-bg {
+      background-color: #ffffff;
+
+      .name-container {
+        .name {
+          color: #3E82E7;
+          font-size: 17px;
+          font-weight: bold;
+        }
+      }
+
+      .peer-container {
+        .peer {
+          font-weight: bold;
+        }
+      }
+
+      .text {
+        font-weight: bold;
+
+        &.green {
+          color: #5C9A2F;
+        }
+      }
+
+      .buttons-container {
+        i {
+          color: #4B5161;
+        }
+      }
+
+    }
+
+  }
+
+}

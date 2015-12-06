@@ -36,6 +36,11 @@
                 $rootScope.$broadcast('onRatesPushModel', model);
             });
 
+            socket.hub.on('onPushOpenPosition' , function (data) {
+                var model = JSON.parse(data).Rate;
+                $rootScope.$broadcast('onOpenPositionsPushModel', model);
+            });
+
             return deferred.promise;
         }
 
