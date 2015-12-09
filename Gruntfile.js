@@ -22,27 +22,6 @@ module.exports = function (grunt) {
             }
         },
 
-        //replace: {
-        //    package: {
-        //        src: 'package.json',
-        //        dest: 'package.json',
-        //        replacements: [{
-        //            from: /\"version\": \"([\d\.]+)\"/g,
-        //            to: function (matchedWord, index, fullText, regexMatches) {   // callback replacement
-        //                return '"version": "' + (parseFloat(regexMatches) + 0.1).toFixed(1) + '"';
-        //            }
-        //        }]
-        //    },
-        //    index: {
-        //        src: 'staged/src/app.html',
-        //        dest: 'staged/src/app.html',
-        //        replacements: [{
-        //            from: '../bower_components/',
-        //            to: 'bower_components/'
-        //        }]
-        //    }
-        //},
-
         copy: {
             temp2build: {
                 files: [
@@ -110,7 +89,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-text-replace');
     grunt.loadNpmTasks('grunt-usemin');
-    grunt.loadNpmTasks('grunt-ftp-deploy');
     grunt.loadNpmTasks('grunt-angular-templates');
 
     grunt.registerTask('default', [
@@ -126,16 +104,6 @@ module.exports = function (grunt) {
         'copy:temp2build',
         'copy:app2build',
         'htmlmin'
-    ]);
-
-    grunt.registerTask('install', [
-        'clean:installSrc',
-        'copy:staged2install'
-    ]);
-
-    grunt.registerTask('deploy', [
-        //'copy:staged2dropbox'
-        //'ftp-deploy'
     ]);
 
 };

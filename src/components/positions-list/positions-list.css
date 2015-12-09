@@ -1,0 +1,32 @@
+div.summary {
+  color: #484B5C;
+  font-size: 1.2rem; }
+  div.summary .button {
+    margin: 0; }
+
+.positions-list {
+  list-style-type: none;
+  margin: 0; }
+  .positions-list li .white-bg {
+    background-color: #ffffff; }
+    .positions-list li .white-bg .name-container .name {
+      color: #3E82E7;
+      font-size: 1.3rem; }
+    .positions-list li .white-bg .peer-container .peer {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #696B77; }
+    .positions-list li .white-bg .title {
+      color: #696B77; }
+    .positions-list li .white-bg .text {
+      font-weight: bold;
+      overflow: hidden; }
+      .positions-list li .white-bg .text.green {
+        color: #5C9A2F; }
+    .positions-list li .white-bg .buttons-container a {
+      margin: auto; }
+      .positions-list li .white-bg .buttons-container a i {
+        color: #4B5161;
+        font-size: 1.9rem; }
+        .positions-list li .white-bg .buttons-container a i.fa-times {
+          font-size: 2.2rem; }

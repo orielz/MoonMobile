@@ -4,30 +4,23 @@
   "description": "PhoneGAP mobile app POC for Tradency",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "start": "grunt"
   },
   "dependencies": {
     "angular": "1.4.3",
     "angular-animate": "1.4.3",
-    "angular-signalr-hub": "1.5.0",
-    "angular-translate": "2.8.1",
     "angular-ui-router": "0.2.15",
-    "chart.js": "1.0.2",
-    "chart.js-scatter": "1.1.2",
-    "d3": "3.5.6",
     "font-awesome": "4.4.0",
-    "foundation": "^4.2.1",
     "foundation-sites": "^6.0.4",
     "grunt": "^0.4.5",
     "jquery": "2.1.4",
-    "lodash": "3.10.1",
-    "moment": "2.10.6",
     "ms-signalr-client": "^2.2.2",
     "ngstorage": "^0.3.10",
     "signalrjs": "^0.2.2",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
+    "css-loader": "^0.23.0",
     "grunt": "*",
     "grunt-angular-templates": "^0.5.7",
     "grunt-contrib-clean": "^0.6.0",
@@ -37,9 +30,10 @@
     "grunt-contrib-htmlmin": "^0.4.0",
     "grunt-contrib-uglify": "^0.9.1",
     "grunt-filerev": "^2.3.1",
-    "grunt-ftp-deploy": "^0.1.10",
     "grunt-text-replace": "^0.4.0",
-    "grunt-usemin": "^3.0.0"
+    "grunt-usemin": "^3.0.0",
+    "lodash": "^3.10.1",
+    "style-loader": "^0.13.0"
   },
   "repository": {
     "type": "git",

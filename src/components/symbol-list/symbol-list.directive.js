@@ -22,23 +22,20 @@
                 }, 0);
             });
 
-            scope.$on('onRatesPushModel', function (currentScope, ratesList) {
+            scope.$on('onRatesUpdate', function (currentScope, updatedRates) {
 
                 // Loop through rates push update array
-                _.each(ratesList, function (pushModel) {
-
-                    // Convert the InstrumentID from number to string
-                    pushModel.InstrumentID = pushModel.InstrumentID.toString();
+                _.each(updatedRates, function (updatedModel) {
 
                     // If the existing model contains the push object, store the model in variable
-                    var model = _.where(scope.model, {InstrumentID: pushModel.InstrumentID})[0];
+                    var model = _.where(scope.model, {InstrumentID: updatedModel.InstrumentID})[0];
 
                     $timeout(function () {
 
                         if (model)
-                            $.extend(model, pushModel); // Update an existing model
+                            $.extend(model, updatedModel); // Update an existing model
                         else if (scope.model)
-                            scope.model.push(pushModel); // Add new model
+                            scope.model.push(updatedModel); // Add new model
 
                     }, 0);
 

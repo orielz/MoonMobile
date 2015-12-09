@@ -3,13 +3,13 @@
  */
 (function (app) {
 
-    app.directive('openPositionsList', ['$timeout', openPositionsList]);
+    app.directive('openPositionsList', ['$timeout', 'positionsListService', openPositionsList]);
 
-    function openPositionsList($timeout) {
+    function openPositionsList($timeout, positionsListService) {
 
         return {
             restrict: 'A',
-            templateUrl: 'components/open-positions-list/open-positions.html',
+            templateUrl: 'components/positions-list/positions-list.html',
             scope: {},
             link: link
         };
@@ -28,18 +28,23 @@
                 var model = _.where(scope.model, {PositionID: pushModel.PositionID})[0];
 
                 $timeout(function () {
-
                     if (model)
                         model.Pips = pushModel.Pips; // Update an existing model
                     else if (scope.model)
                         scope.model.push(pushModel); // Add new model
-
                 }, 0);
+            });
 
+            scope.$on('onRatesUpdate', function (currentScope, updatedRates) {
+                $timeout(function () {
+                    positionsListService.calcPositionsPNL(updatedRates, scope.model);
+                }, 0);
             });
 
             scope.$emit('onOpenPositionsListReady');
+
         }
+
     }
 
 })(angular.module('tradency.mobile'));

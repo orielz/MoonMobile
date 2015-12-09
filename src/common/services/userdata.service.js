@@ -21,6 +21,7 @@
             $http.post(constants.DEV.getUserDataUrl, {LiveDemo: "1", HostName: "ILDEVWEB01"}).then(function(response) {
 
                 $localStorage.accountId = response.data.UserAccounts[0].AccountID;
+                $localStorage.userData = response.data;
 
                 deferred.resolve();
 

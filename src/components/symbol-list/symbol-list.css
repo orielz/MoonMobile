@@ -8,19 +8,20 @@
       display: inline-block;
       cursor: pointer; }
     .symbol-list li .symbol button {
-      width: 90px; }
+      width: 5rem; }
       .symbol-list li .symbol button .title {
-        font-size: 11px;
+        font-size: 0.7rem;
         color: #474a5b;
         text-align: left; }
         .symbol-list li .symbol button .title i, .symbol-list li .symbol button .title .text {
           float: left; }
       .symbol-list li .symbol button .pips {
-        font-size: 17px;
+        font-size: 1rem;
         color: #474a5b;
         text-align: left;
-        clear: both; }
+        clear: both;
+        overflow: hidden; }
       .symbol-list li .symbol button .buy-sell-header {
         text-align: left;
-        font-size: 11px;
-        margin-left: -2px; }
+        font-size: 0.7rem;
+        margin-left: -0.125rem; }

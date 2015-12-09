@@ -1,3 +1,12 @@
+div.summary {
+  color: #484B5C;
+  font-size: 1.2rem;
+
+  .button {
+    margin: 0;
+  }
+}
+
 .positions-list {
   list-style-type: none;
   margin: 0;
@@ -10,28 +19,42 @@
       .name-container {
         .name {
           color: #3E82E7;
-          font-size: 17px;
-          font-weight: bold;
+          font-size: 1.3rem;
         }
       }
 
       .peer-container {
         .peer {
           font-weight: bold;
+          font-size: 1.2rem;
+          color: #696B77;
         }
+      }
+
+      .title {
+        color: #696B77;
       }
 
       .text {
         font-weight: bold;
-
+        overflow: hidden;
         &.green {
           color: #5C9A2F;
         }
       }
 
       .buttons-container {
-        i {
-          color: #4B5161;
+        a {
+            margin: auto;
+          i {
+            color: #4B5161;
+            font-size: 1.9rem;
+
+            &.fa-times {
+              font-size: 2.2rem;
+            }
+
+          }
         }
       }
 

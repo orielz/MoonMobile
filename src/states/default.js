@@ -10,13 +10,16 @@
         $stateProvider
             .state('app', {
                 abstract: true,
-                template: '<ui-view/>',
+                template: '<div ui-view class="full-height"></div>',
                 resolve: {
-                    init: ['authService', 'userDataService', 'signalRService', function (authService, userDataService, signalRService) {
+                    init: ['authService', 'userDataService', 'signalRService', 'ratesService', function (authService, userDataService, signalRService, ratesService) {
 
                         return authService.auth()
                             .then(function () {
                                 return userDataService.getUserData();
+                            })
+                            .then(function() {
+                                return ratesService.getRates();
                             })
                             .then(function () {
                                 return signalRService.listen();

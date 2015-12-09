@@ -7,8 +7,6 @@
 
     function TradingController($scope, $log) {
 
-        $log.log('Hello from TradingController');
-
     }
 
 })(angular.module('tradency.mobile'));

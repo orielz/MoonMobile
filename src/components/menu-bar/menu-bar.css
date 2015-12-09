@@ -1,3 +1,6 @@
+.foundation-mq {
+  font-family: "small=0em&medium=40em&large=64em&xlarge=75em&xxlarge=90em"; }
+
 .menu-bar {
   background-color: #474A5B; }
   .menu-bar li {
@@ -17,5 +20,3 @@
       color: #9FA3AE; }
       .second-bar ul li a.active, .second-bar ul li a:hover {
         color: #666A76; }
-
-/*# sourceMappingURL=menu-bar.css.map */

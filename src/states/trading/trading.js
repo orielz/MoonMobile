@@ -12,7 +12,7 @@
                 parent: 'app',
                 url: '/trading',
                 abstract: true,
-                template: '<ui-view/>',
+                template: '<div ui-view class="full-height"></div>',
                 controller: 'TradingController',
                 controllerAs: 'Trading'
             });

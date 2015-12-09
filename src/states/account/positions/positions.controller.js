@@ -12,6 +12,7 @@
         function activate() {
             registerEvents();
             getData();
+            //console.log($scope.rates);
             //simulatePush();
         };
 

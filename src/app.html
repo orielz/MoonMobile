@@ -8,27 +8,26 @@
     <title>Tradency Mobile POC</title>
 
     <!-- Style -->
-    <link rel="stylesheet" href="../node_modules/foundation-sites/dist/foundation.css">
     <link rel="stylesheet" href="../node_modules/font-awesome/css/font-awesome.css">
 
     <!-- build:css css/app.css -->
-    <link rel="stylesheet" href="assets/scss/global.css">
+    <link rel="stylesheet" href="assets/scss/app.css">
+
     <link rel="stylesheet" href="components/top-bar/top-bar.css">
     <link rel="stylesheet" href="components/menu-bar/menu-bar.css">
     <link rel="stylesheet" href="states/trading/rates/rates.css">
     <link rel="stylesheet" href="states/account/positions/positions.css">
     <link rel="stylesheet" href="components/symbol-list/symbol-list.css">
-    <link rel="stylesheet" href="components/open-positions-list/open-positions.css">
+    <link rel="stylesheet" href="components/positions-list/positions-list.css">
     <!-- endbuild -->
 
     <!-- Vendor -->
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
     <script src="../node_modules/angular/angular.js"></script>
-    <link rel="stylesheet" href="../node_modules/foundation-sites/dist/foundation.js">
+    <script src="../node_modules/foundation-sites/dist/foundation.js"></script>
     <script src="../node_modules/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="../node_modules/ngstorage/ngStorage.js"></script>
-    <script src="../node_modules/jquery/dist/jquery.js"></script>
     <script src="../node_modules/ms-signalr-client/jquery.signalr-2.2.0.js"></script>
-    <script src="../node_modules/angular-signalr-hub/signalr-hub.js"></script>
     <script src="http://srdev.tradency.com:8081/signalr/hubs"></script>
     <script src="../node_modules/underscore/underscore.js"></script>
 
@@ -43,7 +42,11 @@
     <script src="components/menu-bar/menu-bar.controller.js"></script>
     <script src="components/menu-bar/menu-bar.directive.js"></script>
     <script src="components/symbol-list/symbol-list.directive.js"></script>
-    <script src="components/open-positions-list/open-positions-list.directive.js"></script>
+    <script src="components/positions-list/positions-list.directive.js"></script>
+    <script src="components/positions-list/positions-list.service.js"></script>
+
+    <!-- Models -->
+    <script src="models/rates.model.js"></script>
 
     <!-- Modules -->
     <script src="states/trading/trading.controller.js"></script>

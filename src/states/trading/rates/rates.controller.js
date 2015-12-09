@@ -3,9 +3,9 @@
  */
 (function (app) {
 
-    app.controller('RatesController', ['$scope', '$log', 'ratesService', RatesController]);
+    app.controller('RatesController', ['$scope', '$log', 'ratesModel', RatesController]);
 
-    function RatesController($scope, $log, ratesService) {
+    function RatesController($scope, $log, ratesModel) {
 
         activate();
 
@@ -23,10 +23,7 @@
         };
 
         function onSymbolListReady(currentEvent) {
-
-            ratesService.getRates().then(function(model) {
-                $scope.$broadcast('onRatesModel', model.data);
-            });
+            $scope.$broadcast('onRatesModel', ratesModel.model);
         }
     }
 

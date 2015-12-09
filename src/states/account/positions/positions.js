@@ -13,7 +13,16 @@
                 url: '/open-positions',
                 templateUrl: 'states/account/positions/positions.html',
                 controller: 'OpenPositionsController',
-                controllerAs: 'Positions'
+                controllerAs: 'Positions'//,
+                //resolve: {
+                //    rates: function getRates(ratesService) {
+                //        return ratesService.getRates();
+                //    }
+                //
+                //}//,
+                //controller: function ($scope, simpleObj) {
+                //    //$scope.rates = rates;
+                //}
             });
     }
 
