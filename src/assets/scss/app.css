@@ -3344,11 +3344,11 @@ table.hover tr:nth-of-type(even):hover {
 /* Define mobile styles */
 @media only screen and (max-width: 40em) {
   html {
-    font-size: 12px; } }
+    font-size: 14px; } }
 /* max-width 640px, mobile-only styles, use when QAing mobile issues */
 @media only screen and (min-width: 40.063em) {
   html {
-    font-size: 14px; } }
+    font-size: 15px; } }
 /* min-width 641px, medium screens */
 /* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
 @media only screen and (min-width: 64.063em) {
