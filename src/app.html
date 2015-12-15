@@ -29,7 +29,7 @@
     <script src="../node_modules/ngstorage/ngStorage.js"></script>
     <script src="../node_modules/ms-signalr-client/jquery.signalr-2.2.0.js"></script>
     <script src="http://srdev.tradency.com:8081/signalr/hubs"></script>
-    <script src="../node_modules/underscore/underscore.js"></script>
+    <script src="../node_modules/lodash/index.js"></script>
 
     <!-- build:js js/app.js -->
     <!------ App assets ------>
@@ -44,28 +44,34 @@
     <script src="components/symbol-list/symbol-list.directive.js"></script>
     <script src="components/positions-list/positions-list.directive.js"></script>
     <script src="components/positions-list/positions-list.service.js"></script>
+    <!--<script src="components/positions-list/positions-list.worker.js"></script>-->
 
     <!-- Models -->
-    <script src="models/rates.model.js"></script>
+    <script src="models/rates/rates.model.js"></script>
+    <script src="models/rates/rates.service.js"></script>
+
+    <script src="models/positions/positions.model.js"></script>
+    <script src="models/positions/positions.service.js"></script>
+    <script src="models/positions/positions.worker.js"></script>
 
     <!-- Modules -->
     <script src="states/trading/trading.controller.js"></script>
     <script src="states/trading/trading.js"></script>
 
     <script src="states/trading/rates/rates.controller.js"></script>
-    <script src="states/trading/rates/rates.service.js"></script>
     <script src="states/trading/rates/rates.js"></script>
 
     <script src="states/account/account.controller.js"></script>
     <script src="states/account/account.js"></script>
 
     <script src="states/account/positions/positions.controller.js"></script>
-    <script src="states/account/positions/positions.service.js"></script>
+
     <script src="states/account/positions/positions.js"></script>
 
     <!-- Common -->
     <script src="common/services/auth.service.js"></script>
     <script src="common/services/userdata.service.js"></script>
+    <script src="common/services/utils.service.js"></script>
     <script src="common/config/constant.js"></script>
     <script src="common/config/config.js"></script>
     <script src="states/default.js"></script>

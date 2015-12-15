@@ -12,7 +12,7 @@
                 abstract: true,
                 template: '<div ui-view class="full-height"></div>',
                 resolve: {
-                    init: ['authService', 'userDataService', 'signalRService', 'ratesService', function (authService, userDataService, signalRService, ratesService) {
+                    init: ['authService', 'userDataService', 'signalRService', 'ratesService', 'openPositionsService', function (authService, userDataService, signalRService, ratesService, openPositionsService) {
 
                         return authService.auth()
                             .then(function () {
@@ -20,6 +20,9 @@
                             })
                             .then(function() {
                                 return ratesService.getRates();
+                            })
+                            .then(function() {
+                                return openPositionsService.getOpenPositions();
                             })
                             .then(function () {
                                 return signalRService.listen();

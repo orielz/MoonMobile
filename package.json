@@ -14,10 +14,10 @@
     "foundation-sites": "^6.0.4",
     "grunt": "^0.4.5",
     "jquery": "2.1.4",
+    "lodash": "^3.10.1",
     "ms-signalr-client": "^2.2.2",
     "ngstorage": "^0.3.10",
-    "signalrjs": "^0.2.2",
-    "underscore": "^1.8.3"
+    "signalrjs": "^0.2.2"
   },
   "devDependencies": {
     "css-loader": "^0.23.0",

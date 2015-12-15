@@ -3,9 +3,9 @@
  */
 (function (app) {
 
-    app.directive('symbolList', ['$timeout', SymbolList]);
+    app.directive('symbolList', ['ratesModel', SymbolList]);
 
-    function SymbolList($timeout) {
+    function SymbolList(ratesModel) {
 
         return {
             restrict: 'A',
@@ -16,37 +16,10 @@
 
         function link(scope, iElement, attr, controller) {
 
-            scope.$on('onRatesModel', function (currentScope, model) {
-                $timeout(function () {
-                    scope.model = model;
-                }, 0);
-            });
-
-            scope.$on('onRatesUpdate', function (currentScope, updatedRates) {
-
-                // Loop through rates push update array
-                _.each(updatedRates, function (updatedModel) {
-
-                    // If the existing model contains the push object, store the model in variable
-                    var model = _.where(scope.model, {InstrumentID: updatedModel.InstrumentID})[0];
-
-                    $timeout(function () {
-
-                        if (model)
-                            $.extend(model, updatedModel); // Update an existing model
-                        else if (scope.model)
-                            scope.model.push(updatedModel); // Add new model
-
-                    }, 0);
-
-                });
-
-            });
+            scope.model = ratesModel.model;
 
             scope.$emit('onSymbolListReady');
         }
-
-
     }
 
 })(angular.module('tradency.mobile'));

@@ -15,16 +15,13 @@
         };
 
         function registerEvents() {
-            $scope.$on('onSymbolListReady', onSymbolListReady);
+
         };
 
         function getData() {
 
         };
 
-        function onSymbolListReady(currentEvent) {
-            $scope.$broadcast('onRatesModel', ratesModel.model);
-        }
     }
 
 })(angular.module('tradency.mobile'));
