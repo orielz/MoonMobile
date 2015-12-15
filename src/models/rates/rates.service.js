@@ -6,9 +6,9 @@
 
     var serviceId = 'ratesService';
 
-    app.factory(serviceId, ['$localStorage', '$http', '$rootScope', 'constants', 'ratesModel', '$interval', 'utilsService', ratesService]);
+    app.factory(serviceId, ['$localStorage', '$http', '$rootScope', 'constants', 'ratesModel', '$interval', 'utilsService', '$timeout', ratesService]);
 
-    function ratesService($localStorage, $http, $rootScope, constants, ratesModel, $interval, utilsService) {
+    function ratesService($localStorage, $http, $rootScope, constants, ratesModel, $interval, utilsService, $timeout) {
 
         return {
             getRates: getRates
@@ -20,30 +20,33 @@
             var getRatesUrl = constants.DEV.getRatesUrl;
 
             return $http.post(getRatesUrl, {AccountID: accountId})
-                .then(function (response) {
-
-                    // Loop through the response.data array and convert it to an object list
-                    // This is done in order to access properties by ID and not loop all over the array to find an item
-                    _.each(response.data, function (rate) {
-                        ratesModel.model[rate.InstrumentID] = rate;
-                    });
-
-                }).then(function () {
-                    return listenToRatesPush();
-                });
+                .then(addToModel)
+                .then(registerEventListeners);
         }
 
-        function listenToRatesPush() {
-
-            $rootScope.$on('onRatesPushModel', function (currentScope, ratesList) {
-
-                utilsService.addOrUpdateList(ratesModel.model, ratesList, 'InstrumentID');
-
-                $rootScope.$broadcast('onRatesUpdated', ratesModel.model);
-
+        // Add ajax response to persistence model
+        function addToModel(response) {
+            // Loop through the response.data array and convert it to an object list
+            // This is done in order to access properties by ID and not loop all over the array to find an item
+            _.each(response.data, function (rate) {
+                ratesModel.model[rate.InstrumentID] = rate;
             });
+        }
 
+        // Register listeners for angular events
+        function registerEventListeners() {
+            $rootScope.$on('onRatesPushModel', onRatesPushModel);
             //startSimulationOfRates();
+        }
+
+        function onRatesPushModel(currentScope, ratesList) {
+
+            $timeout(function() {
+                utilsService.addOrUpdateList(ratesModel.model, ratesList, 'InstrumentID');
+            }, 0);
+
+            $rootScope.$broadcast('onRatesUpdated', ratesModel.model);
+
         }
 
         function startSimulationOfRates() {
