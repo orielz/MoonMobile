@@ -58,7 +58,7 @@
                 var model = listToUpdate[modelId];
 
                 if (model)
-                    $.extend(model, updatedModel); // Update an existing model
+                    _.assign(model, updatedModel); // Update an existing model
                 else if (listToUpdate)
                     listToUpdate[modelId] = updatedModel;
             });
@@ -71,7 +71,7 @@
             var model = listToUpdate[modelId];
 
             if (model)
-                $.extend(model, item); // Update an existing model
+                _.assign(model, item); // Update an existing model
             else if (listToUpdate)
                 listToUpdate[modelId] = item;
         }
