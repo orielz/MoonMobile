@@ -17,6 +17,9 @@
 
       button {
 
+        &.up { border: 0.1rem solid #0f9d58; }
+        &.down { border: 0.1rem solid #db4437; }
+
         width: 5rem;
 
         .title {

@@ -8,9 +8,9 @@
     var worker = null;
     var isWorkerInProgress = false;
 
-    app.factory(serviceId, ['$localStorage', '$http', 'constants', 'positionsModel', '$rootScope', 'utilsService', '$interval', '$timeout', openPositionsService]);
+    app.factory(serviceId, ['$localStorage', '$http', 'constants', 'positionsModel', '$rootScope', 'utilsService', '$interval', '$timeout', 'ratesModel', openPositionsService]);
 
-    function openPositionsService($localStorage, $http, constants, positionsModel, $rootScope, utilsService, $interval, $timeout) {
+    function openPositionsService($localStorage, $http, constants, positionsModel, $rootScope, utilsService, $interval, $timeout, ratesModel) {
 
         return {
             getOpenPositions: getOpenPositions
@@ -48,9 +48,9 @@
             }, 0);
         }
 
-        function onRatesUpdated(currentScope, updatedRates) {
+        function onRatesUpdated(currentScope) {
 
-            if (!positionsModel.model || !updatedRates)
+            if (!positionsModel.model || !ratesModel.model)
                 return;
 
             if (isWorkerInProgress)
@@ -76,7 +76,7 @@
             }
 
             worker.postMessage({
-                updatedRates: updatedRates,
+                updatedRates: ratesModel.model,
                 positionsList: positionsModel.model,
                 userData: $localStorage.userData
             }); // Start processing

@@ -9,6 +9,10 @@
       cursor: pointer; }
     .symbol-list li .symbol button {
       width: 5rem; }
+      .symbol-list li .symbol button.up {
+        border: 0.1rem solid #0f9d58; }
+      .symbol-list li .symbol button.down {
+        border: 0.1rem solid #db4437; }
       .symbol-list li .symbol button .title {
         font-size: 0.7rem;
         color: #474a5b;

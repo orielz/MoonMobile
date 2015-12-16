@@ -2,7 +2,8 @@
     'use strict';
 
     app.value('ratesModel', {
-        model: {}
+        model: {},
+        spreads: {}
     });
 
 })(angular.module('tradency.mobile'));

@@ -8,7 +8,7 @@
                 <div class="name padding-left padding-top padding-bottom">{{::item.InstrumentName}}</div>
 
                 <span class="pull-right padding-top-half">
-                    <button ng-class="{'up':item.bidDiff < 0,'down':item.bidDiff > 0}" class="button padding-half">
+                    <button ng-class="{'up':item.BidDiff < 0,'down':item.BidDiff > 0}" class="button padding-half">
                         <div class="title">
                             <i class="fa fa-arrow-down"></i>
                             <span class="text">Sell</span>
@@ -21,7 +21,7 @@
                 </span>
 
                 <span class="pull-right padding-top-half">
-                    <button ng-class="{'up':item.askDiff < 0,'down':item.askDiff > 0}" class="button padding-half">
+                    <button ng-class="{'up':item.AskDiff < 0,'down':item.AskDiff > 0}" class="button padding-half">
                         <span class="title">
                             <i class="fa fa-arrow-up"></i>
                             <span class="text">Buy</span>

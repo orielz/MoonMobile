@@ -10,7 +10,8 @@
             getUserDataUrl: 'http://mws.tradency.com/UserData/GetUserData',
             signalRUrl: 'http://192.168.1.34:8081/signalr',
             getOpenPositions: 'http://mws.tradency.com/Positions/GetPositions',
-            getRatesUrl: 'http://mws.tradency.com/Rates/GetRates'
+            getRatesUrl: 'http://mws.tradency.com/Rates/GetRates',
+            getSpreadsUrl: 'http://mws.tradency.com/Spreads/GetSpreads'
         },
         PROD: {}
 
