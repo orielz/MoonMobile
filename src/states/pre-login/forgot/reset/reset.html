@@ -1,0 +1,35 @@
+<section class="forgot full-height">
+    <div class="row">
+        <div class="small-12 columns header-row">
+            <i class="fa fa-arrow-left"></i>
+            Forgot Password
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-12 columns padding">
+            Please enter a new password below
+        </div>
+    </div>
+    <form novalidate name="form" ng-submit="reset.reset(form)">
+        <div class="row">
+            <div class="small-12 columns">
+                <input type="password" ng-model="reset.model.NewPassword" name="newpassword" placeholder="New Password" required ng-keydown="submitted=false;reset.error=null" ng-model-options="{ updateOn: 'blur' }"  />
+                <div class="error" ng-show="(form.newpassword.$dirty || submitted) && form.newpassword.$error.required">Password is required</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-12 center-align columns">
+                {{reset.error}}
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-4 columns">
+                <a href="#" class="button expanded" ui-sref="login">Cancel</a>
+            </div>
+            <div class="small-8 columns">
+                <button type="submit" class="button expanded" ng-click="submitted=true;">Save Password</button>
+            </div>
+        </div>
+    </form>
+</section>

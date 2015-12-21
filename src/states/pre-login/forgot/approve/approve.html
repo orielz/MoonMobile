@@ -1,0 +1,35 @@
+<section class="forgot full-height">
+    <div class="row">
+        <div class="small-12 columns header-row">
+            <i class="fa fa-arrow-left"></i>
+            Forgot Password
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-12 columns padding">
+            Please enter the confirmation code you received in the email sent to you and click Send.
+        </div>
+    </div>
+    <form novalidate name="form" ng-submit="approve.approve(form)">
+        <div class="row">
+            <div class="small-12 columns">
+                <input type="text" ng-model="approve.model.ConfirmationCode" name="code" placeholder="Sent Code" required ng-keydown="submitted=false;approve.error=null" ng-model-options="{ updateOn: 'blur' }" />
+                <div class="error" ng-show="(form.code.$dirty || submitted) && form.code.$error.required">Confirmation Code is required</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-12 center-align columns">
+                {{approve.error}}
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-4 columns">
+                <a href="#" class="button expanded" ui-sref="login">Cancel</a>
+            </div>
+            <div class="small-8 columns">
+                <button type="submit" class="button expanded" ng-click="submitted=true;">Send</button>
+            </div>
+        </div>
+    </form>
+</section>

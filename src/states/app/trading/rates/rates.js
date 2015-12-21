@@ -11,7 +11,7 @@
             .state('rates', {
                 parent: 'trading',
                 url: '/rates',
-                templateUrl: 'states/trading/rates/rates.html',
+                templateUrl: 'states/app/trading/rates/rates.html',
                 controller: 'RatesController',
                 controllerAs: 'Rates'
             });

@@ -41,7 +41,6 @@
                 $rootScope.$broadcast('onOpenPositionsPushModel', model);
             });
 
-
             return deferred.promise;
         }
 

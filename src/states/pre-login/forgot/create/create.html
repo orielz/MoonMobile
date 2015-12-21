@@ -1,0 +1,42 @@
+<section class="forgot full-height">
+    <div class="row">
+        <div class="small-12 columns header-row">
+            <i class="fa fa-arrow-left"></i>
+            Forgot Password
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-12 columns padding">
+            Please enter your username and email below, confirmation code wil be sent in the next few minutes.
+        </div>
+    </div>
+    <form novalidate name="form" ng-submit="create.create(form)">
+        <div class="row">
+            <div class="small-12 columns">
+                <input type="text" ng-model="create.model.UserName" name="user" placeholder="Username" required ng-keydown="submitted=false;create.error=null" ng-model-options="{ updateOn: 'blur' }" />
+                <div class="error" ng-show="(form.user.$dirty || submitted) && form.user.$error.required">Username is required</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-12 columns">
+                <input type="email" ng-model="create.model.Email" name="email" placeholder="Email" required ng-keydown="submitted=false;create.error=null" ng-model-options="{ updateOn: 'blur' }" />
+                <div class="error" ng-show="(form.email.$dirty || submitted) && form.email.$error.required">Email is required</div>
+                <div class="error" ng-show="(form.email.$dirty || submitted) && form.email.$error.email">Email is not valid</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-12 center-align columns">
+                {{create.error}}
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-4 columns">
+                <a href="#" class="button expanded" ui-sref="login">Cancel</a>
+            </div>
+            <div class="small-8 columns">
+                <button type="submit" class="button expanded" ng-click="submitted=true;">Send</button>
+            </div>
+        </div>
+    </form>
+</section>

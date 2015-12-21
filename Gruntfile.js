@@ -17,7 +17,7 @@ module.exports = function (grunt) {
                     collapseWhitespace: true
                 },
                 files: {
-                    'build/src/app.html': 'build/src/app.html'
+                    'build/src/index.html': 'build/src/index.html'
                 }
             }
         },
@@ -48,7 +48,7 @@ module.exports = function (grunt) {
                     {
                         expand: true,
                         cwd: 'src',
-                        src: ['app.html'],
+                        src: ['index.html'],
                         dest: '.tmp'
                     }
                 ]
@@ -56,14 +56,14 @@ module.exports = function (grunt) {
         },
 
         useminPrepare: {
-            html: ['src/app.html'],
+            html: ['src/index.html'],
             options: {
                 dest: '.tmp'
             }
         },
 
         usemin: {
-            html: ['.tmp/app.html']
+            html: ['.tmp/index.html']
         },
 
         ngtemplates:  {

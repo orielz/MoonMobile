@@ -13,10 +13,13 @@
     <!-- build:css css/app.css -->
     <link rel="stylesheet" href="assets/scss/app.css">
 
+    <link rel="stylesheet" href="states/pre-login/login/login.css">
+    <link rel="stylesheet" href="states/pre-login/forgot/forgot.css">
+
     <link rel="stylesheet" href="components/top-bar/top-bar.css">
     <link rel="stylesheet" href="components/menu-bar/menu-bar.css">
-    <link rel="stylesheet" href="states/trading/rates/rates.css">
-    <link rel="stylesheet" href="states/account/positions/positions.css">
+    <link rel="stylesheet" href="states/app/trading/rates/rates.css">
+    <link rel="stylesheet" href="states/app/account/positions/positions.css">
     <link rel="stylesheet" href="components/symbol-list/symbol-list.css">
     <link rel="stylesheet" href="components/positions-list/positions-list.css">
     <!-- endbuild -->
@@ -52,19 +55,28 @@
     <script src="models/positions/positions.service.js"></script>
     <script src="models/positions/positions.worker.js"></script>
 
-    <!-- Modules -->
-    <script src="states/trading/trading.controller.js"></script>
-    <script src="states/trading/trading.js"></script>
+    <!-- States -->
+    <script src="states/pre-login/login/login.controller.js"></script>
+    <script src="states/pre-login/login/login.js"></script>
 
-    <script src="states/trading/rates/rates.controller.js"></script>
-    <script src="states/trading/rates/rates.js"></script>
+    <script src="states/pre-login/forgot/create/create.controller.js"></script>
+    <script src="states/pre-login/forgot/approve/approve.controller.js"></script>
+    <script src="states/pre-login/forgot/reset/reset.controller.js"></script>
+    <script src="states/pre-login/forgot/forgot.service.js"></script>
+    <script src="states/pre-login/forgot/forgot.state.js"></script>
 
-    <script src="states/account/account.controller.js"></script>
-    <script src="states/account/account.js"></script>
+    <script src="states/app/trading/trading.controller.js"></script>
+    <script src="states/app/trading/trading.js"></script>
 
-    <script src="states/account/positions/positions.controller.js"></script>
+    <script src="states/app/trading/rates/rates.controller.js"></script>
+    <script src="states/app/trading/rates/rates.js"></script>
 
-    <script src="states/account/positions/positions.js"></script>
+    <script src="states/app/account/account.controller.js"></script>
+    <script src="states/app/account/account.js"></script>
+
+    <script src="states/app/account/positions/positions.controller.js"></script>
+
+    <script src="states/app/account/positions/positions.js"></script>
 
     <!-- Common -->
     <script src="common/services/auth.service.js"></script>
@@ -72,19 +84,15 @@
     <script src="common/services/utils.service.js"></script>
     <script src="common/config/constant.js"></script>
     <script src="common/config/config.js"></script>
-    <script src="states/default.js"></script>
+    <script src="common/services/interceptor.service.js"></script>
+    <script src="states/app/layout.js"></script>
     <script src="common/services/signalr.service.js"></script>
     <!-- endbuild -->
 
 </head>
 <body>
 
-    <header>
-        <top-bar></top-bar>
-        <menu-bar></menu-bar>
-    </header>
-
-    <div ui-view></div>
+    <div ui-view class="full-height"></div>
 
 </body>
 </html>

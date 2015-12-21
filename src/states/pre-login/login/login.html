@@ -1,0 +1,53 @@
+<section class="login full-height">
+    <div class="row">
+        <div class="small-12 columns padding-double">
+            TRADENCY LOGO
+        </div>
+    </div>
+    <form novalidate name="form" ng-submit="login.login(form)">
+        <div class="row padding-top-double">
+            <div class="small-12 columns">
+                <select ng-model="login.brokers" name="broker" required />
+                <div class="error" ng-show="form.broker.$error.required">Please select broker</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-12 columns">
+                <input type="text" ng-model="login.credentials.userName" name="user" placeholder="Username" required />
+                <div class="error" ng-show="form.user.$dirty && form.user.$error.required">Username is required</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-12 columns">
+                <input type="password" ng-model="login.credentials.password" name="pass" placeholder="Password" required />
+                <div class="error" ng-show="form.pass.$dirty && form.pass.$error.required">Password is required</div>
+            </div>
+        </div>
+        <div class="row padding-top">
+            <div class="small-12 columns">
+                <button class="button expanded" type="submit">Login</button>
+            </div>
+        </div>
+    </form>
+    <div class="row padding-top-double">
+        <div class="small-12 columns text-center">
+            <a ui-sref="create">Forgot Password</a>
+        </div>
+    </div>
+    <!--<div class="row padding-top">-->
+        <!--<div class="small-12 columns text-center">-->
+            <!--<a ui-sref="forgot">English</a>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="row footer padding-half">
+        <div class="small-4 columns">
+            LOGO
+        </div>
+        <div class="small-4 columns">
+            Version 0.1
+        </div>
+        <div class="small-4 columns">
+            Broker
+        </div>
+    </div>
+</section>

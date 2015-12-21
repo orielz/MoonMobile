@@ -11,7 +11,7 @@
             .state('open-positions', {
                 parent: 'account',
                 url: '/open-positions',
-                templateUrl: 'states/account/positions/positions.html',
+                templateUrl: 'states/app/account/positions/positions.html',
                 controller: 'OpenPositionsController',
                 controllerAs: 'Positions'
             });

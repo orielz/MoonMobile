@@ -6,6 +6,7 @@
     app.config(['$httpProvider', function ($httpProvider) {
         $httpProvider.defaults.headers.common['x-brokerurl'] = 'http://web.tradency.com/b78/InvastSec';
         $httpProvider.defaults.headers.common['X-originID'] = 'WEB';
+        $httpProvider.interceptors.push('httpInterceptor');
     }]);
 
 })(angular.module('tradency.mobile'));

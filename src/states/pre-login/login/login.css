@@ -1,0 +1,13 @@
+.foundation-mq {
+  font-family: "small=0em&medium=40em&large=64em&xlarge=75em&xxlarge=90em"; }
+
+section.login {
+  background-color: #D3DBDE; }
+  section.login a.button.expanded {
+    background-color: white;
+    color: black; }
+  section.login .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0; }

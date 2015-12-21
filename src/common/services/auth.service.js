@@ -14,11 +14,15 @@
             auth: auth
         };
 
-        function auth() {
+        function auth(credentials) {
 
             var deferred = $q.defer();
 
-            $http.post(constants.DEV.authUrl, {userName: "feteam", password: "987654", liveDemo: "1"}).then(function(response) {
+            credentials.liveDemo = "1";
+
+            $http.post(constants.DEV.authUrl, credentials).then(success, failed);
+
+            function success(response) {
 
                 var data = response.data;
 
@@ -30,7 +34,11 @@
                 else {
                     deferred.reject();
                 }
-            });
+            }
+
+            function failed(response) {
+                deferred.reject(response);
+            }
 
             return deferred.promise;
         }

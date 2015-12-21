@@ -3296,37 +3296,15 @@ table.hover tr:nth-of-type(even):hover {
 .padding-top-quarter {
   padding-top: 0.25em; }
 
+.padding-double {
+  padding: 2em; }
+
 /* BUTTONS STYLE */
-.button, button {
-  border-color: #a0a7b7;
-  border-top-color: #a0a7b7;
-  border-right-color: #a0a7b7;
-  border-bottom-color: #a0a7b7;
-  border-left-color: #a0a7b7;
-  border-style: solid;
-  border-width: 1px;
-  background: #fff;
-  background: -moz-linear-gradient(top, #Fefefe 0, #ececec 50%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #Fefefe), color-stop(50%, #ececec));
-  background: -webkit-linear-gradient(top, #Fefefe 0, #ececec 50%);
-  background: -o-linear-gradient(top, #Fefefe 0, #ececec 50%);
-  background: -ms-linear-gradient(top, #Fefefe 0, #ececec 50%);
-  background: linear-gradient(to bottom, #Fefefe 0, #ececec 50%);
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  border-radius: 4px;
-  color: #4B5161; }
-  .button:hover, button:hover {
-    border-color: #375e97;
-    background: #fff;
-    background: -moz-linear-gradient(top, #Fefefe 0, #ececec 50%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #Fefefe), color-stop(50%, #ececec));
-    background: -webkit-linear-gradient(top, #Fefefe 0, #ececec 50%);
-    background: -o-linear-gradient(top, #Fefefe 0, #ececec 50%);
-    background: -ms-linear-gradient(top, #Fefefe 0, #ececec 50%);
-    background: linear-gradient(to bottom, #Fefefe 0, #ececec 50%);
-    color: #4B5161; }
+.header-row {
+  background-color: #393B48;
+  color: white;
+  font-size: 1.3rem;
+  padding: 1rem; }
 
 .full-height {
   height: 100%; }
@@ -3340,6 +3318,11 @@ table.hover tr:nth-of-type(even):hover {
 
 .left-align {
   text-align: left; }
+
+div.error {
+  margin-top: -0.95rem;
+  font-size: 0.9rem;
+  color: #a94442; }
 
 /* Define mobile styles */
 @media only screen and (max-width: 40em) {

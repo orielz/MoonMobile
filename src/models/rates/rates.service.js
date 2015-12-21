@@ -64,7 +64,6 @@
 
         function onRatesPushModel(currentScope, ratesList) {
 
-
             if (!ratesModel.model || !ratesList)
                 return;
 
