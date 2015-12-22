@@ -7,7 +7,7 @@
     <form novalidate name="form" ng-submit="login.login(form)">
         <div class="row padding-top-double">
             <div class="small-12 columns">
-                <select ng-model="login.brokers" name="broker" required />
+                <select ng-options="b as b.brokerName for b in login.brokers track by b.brokerID" ng-model="login.selectedBroker" name="broker" required />
                 <div class="error" ng-show="form.broker.$error.required">Please select broker</div>
             </div>
         </div>

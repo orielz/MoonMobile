@@ -6,6 +6,7 @@
     app.constant('constants', {
 
         DEV: {
+            mobileProductId: 4,
             authUrl: 'http://mws.tradency.com/authentication',
             getUserDataUrl: 'http://mws.tradency.com/UserData/GetUserData',
             signalRUrl: 'http://192.168.1.34:8081/signalr',
@@ -14,7 +15,8 @@
             getSpreadsUrl: 'http://mws.tradency.com/Spreads/GetSpreads',
             createConfirmationCodeUrl: 'http://mws.tradency.com/UserManager/CreateConfirmationCode',
             isConfirmationCodeValidUrl: 'http://mws.tradency.com/UserManager/IsConfirmationCodeValid',
-            updateNewPasswordUrl: 'http://mws.tradency.com/UserManager/updateNewPassword'
+            updateNewPasswordUrl: 'http://mws.tradency.com/UserManager/updateNewPassword',
+            getMobileBrokersListUrl: 'http://mws.tradency.com/MobileDeviceController/GetMobileBrokersList'
         },
         PROD: {}
 

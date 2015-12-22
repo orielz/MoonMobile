@@ -3,9 +3,9 @@
  */
 (function (app) {
 
-    app.controller('LoginController', ['authService', '$state', '$log', LoginController]);
+    app.controller('LoginController', ['authService', '$state', 'loginService', LoginController]);
 
-    function LoginController(authService, $state, $log) {
+    function LoginController(authService, $state, loginService) {
 
         var vm = this;
         vm.credentials = {};
@@ -13,22 +13,25 @@
         activate();
 
         function activate() {
-            registerEvents();
             getData();
         };
 
-        function registerEvents() {
-
-        };
-
         function getData() {
-
+            loginService.getMobileBrokersList().then(onBrokerListSuccess, onBrokerListFailed);
         };
+
+        function onBrokerListSuccess(list) {
+            vm.brokers = list;
+        }
+
+        function onBrokerListFailed(reason) {
+
+        }
 
         vm.login = function(form) {
 
-            //if (form.$invalid)
-            //    return;
+            if (form.$invalid)
+                return;
 
             authService.auth(vm.credentials).then(authSuccess, authFailed);
         };
