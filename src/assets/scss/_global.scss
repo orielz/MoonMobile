@@ -1,30 +1,83 @@
 /* SPACING */
-.no-padding { padding: 0; }
+.no-padding {
+  padding: 0;
+}
 
-.padding { padding: 1em; }
-.padding-half { padding: 0.5em;; }
+.padding {
+  padding: 1em;
+}
 
-.padding-bottom { padding-bottom: 1em; }
-.padding-bottom-double { padding-bottom: 2em; }
-.padding-bottom-half { padding-bottom: 0.5em; }
-.padding-bottom-quarter { padding-bottom: 0.25em; }
+.padding-half {
+  padding: 0.5em;;
+}
 
-.padding-right { padding-right: 1em; }
-.padding-right-half { padding-right: 0.5em; }
-.padding-right-double { padding-right: 2em; }
-.padding-right-quarter { padding-right: 0.25em; }
+.padding-bottom {
+  padding-bottom: 1em;
+}
 
-.padding-left { padding-left: 1em; }
-.padding-left-half { padding-left: 0.5em; }
-.padding-left-double { padding-left: 2em; }
-.padding-left-quarter { padding-left: 0.25em; }
+.padding-bottom-double {
+  padding-bottom: 2em;
+}
 
-.padding-top { padding-top: 1em; }
-.padding-top-half { padding-top: 0.5em; }
-.padding-top-double { padding-top: 2em; }
-.padding-top-quarter { padding-top: 0.25em; }
+.padding-bottom-half {
+  padding-bottom: 0.5em;
+}
 
-.padding-double { padding: 2em; }
+.padding-bottom-quarter {
+  padding-bottom: 0.25em;
+}
+
+.padding-right {
+  padding-right: 1em;
+}
+
+.padding-right-half {
+  padding-right: 0.5em;
+}
+
+.padding-right-double {
+  padding-right: 2em;
+}
+
+.padding-right-quarter {
+  padding-right: 0.25em;
+}
+
+.padding-left {
+  padding-left: 1em;
+}
+
+.padding-left-half {
+  padding-left: 0.5em;
+}
+
+.padding-left-double {
+  padding-left: 2em;
+}
+
+.padding-left-quarter {
+  padding-left: 0.25em;
+}
+
+.padding-top {
+  padding-top: 1em;
+}
+
+.padding-top-half {
+  padding-top: 0.5em;
+}
+
+.padding-top-double {
+  padding-top: 2em;
+}
+
+.padding-top-quarter {
+  padding-top: 0.25em;
+}
+
+.padding-double {
+  padding: 2em;
+}
 
 /* BUTTONS STYLE */
 //.button, button {
@@ -67,6 +120,16 @@
 //
 //}
 
+button.button {
+  border: 1px solid #a0a7b7;
+  color: #46495b;
+  @include gradient(#ffffff, rgba(255, 255, 255, 0.5));
+}
+
+[type='text'], [type='password'], [type='date'], [type='datetime'], [type='datetime-local'], [type='month'], [type='week'], [type='email'], [type='number'], [type='search'], [type='tel'], [type='time'], [type='url'], [type='color'], textarea, select {
+  border: 1px solid #a0a7b7 !important;
+}
+
 .header-row {
   background-color: #393B48;
   color: white;
@@ -74,17 +137,29 @@
   padding: 1rem;
 }
 
+.full-height {
+  height: 100%;
+}
 
-.full-height { height: 100%; } /* Height */
-.center-align { text-align: center; }
-.right-align { text-align: right; }
-.left-align { text-align: left; }
+/* Height */
+.center-align {
+  text-align: center;
+}
+
+.right-align {
+  text-align: right;
+}
+
+.left-align {
+  text-align: left;
+}
 
 div.error {
   margin-top: -0.95rem;
   font-size: 0.9rem;
   color: #a94442;
 }
+
 input.ng-dirty.ng-invalid {
   //border: 1px solid #a94442;
 }

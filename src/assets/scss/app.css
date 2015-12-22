@@ -3300,6 +3300,21 @@ table.hover tr:nth-of-type(even):hover {
   padding: 2em; }
 
 /* BUTTONS STYLE */
+button.button {
+  border: 1px solid #a0a7b7;
+  color: #46495b;
+  background: #ffffff;
+  background: -moz-linear-gradient(top, #ffffff 0, rgba(255, 255, 255, 0.5) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ffffff), color-stop(100%, rgba(255, 255, 255, 0.5)));
+  background: -webkit-linear-gradient(top, #ffffff 0, rgba(255, 255, 255, 0.5) 100%);
+  background: -o-linear-gradient(top, #ffffff 0, rgba(255, 255, 255, 0.5) 100%);
+  background: -ms-linear-gradient(top, #ffffff 0, rgba(255, 255, 255, 0.5) 100%);
+  background: linear-gradient(to bottom, #ffffff 0, rgba(255, 255, 255, 0.5) 100%);
+  filter: "progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='rgba(255, 255, 255, 0.5)',GradientType=0 )"; }
+
+[type='text'], [type='password'], [type='date'], [type='datetime'], [type='datetime-local'], [type='month'], [type='week'], [type='email'], [type='number'], [type='search'], [type='tel'], [type='time'], [type='url'], [type='color'], textarea, select {
+  border: 1px solid #a0a7b7 !important; }
+
 .header-row {
   background-color: #393B48;
   color: white;
