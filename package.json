@@ -1,7 +1,7 @@
 {
-  "name": "mobilepoc",
+  "name": "moonmobile",
   "version": "1.0.0",
-  "description": "PhoneGAP mobile app POC for Tradency",
+  "description": "Moon Mobile @ Tradency",
   "main": "index.js",
   "scripts": {
     "start": "grunt"
@@ -12,7 +12,6 @@
     "angular-ui-router": "0.2.15",
     "font-awesome": "4.4.0",
     "foundation-sites": "^6.0.4",
-    "grunt": "^0.4.5",
     "jquery": "2.1.4",
     "lodash": "^3.10.1",
     "ms-signalr-client": "^2.2.2",
@@ -20,7 +19,6 @@
     "signalrjs": "^0.2.2"
   },
   "devDependencies": {
-    "css-loader": "^0.23.0",
     "grunt": "*",
     "grunt-angular-templates": "^0.5.7",
     "grunt-contrib-clean": "^0.6.0",
@@ -31,13 +29,11 @@
     "grunt-contrib-uglify": "^0.9.1",
     "grunt-filerev": "^2.3.1",
     "grunt-text-replace": "^0.4.0",
-    "grunt-usemin": "^3.0.0",
-    "lodash": "^3.10.1",
-    "style-loader": "^0.13.0"
+    "grunt-usemin": "^3.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/orielz/MobilePOC.git"
+    "url": "git+https://github.com/orielz/MoonMobile.git"
   },
   "keywords": [
     "Mobile",
@@ -47,7 +43,7 @@
   "author": "Oriel Zaken",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/orielz/MobilePOC/issues"
+    "url": "https://github.com/orielz/MoonMobile/issues"
   },
-  "homepage": "https://github.com/orielz/MobilePOC#readme"
+  "homepage": "https://github.com/orielz/MoonMobile#readme"
 }

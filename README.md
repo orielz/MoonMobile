@@ -1,2 +1,2 @@
-# MobilePOC
-PhoneGAP mobile app POC for Tradency
+# Moon Mobile
+Moon Mobile @ Tradency
