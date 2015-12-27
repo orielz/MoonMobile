@@ -1,0 +1,101 @@
+<section class="details full-height">
+    <div class="row">
+        <div class="small-12 columns header-row">
+            <i class="fa fa-arrow-left"></i>
+            Open Position
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="small-12 columns padding">
+            <div class="row">
+                <div class="small-12 columns">
+                   <strong>{{::edit.model.SystemName}}</strong>
+                </div>
+            </div>
+            <div class="row">
+                <div class="small-12 columns">
+                    {{::edit.model.InstrumentName}} {{::edit.model.TradePositionTypeName}}
+                </div>
+            </div>
+            <div class="row padding-top">
+                <div class="small-4 columns">AccountID</div>
+                <div class="small-4 columns">Amount</div>
+                <div class="small-4 columns">TicketID</div>
+            </div>
+            <div class="row">
+                <div class="small-4 columns">{{::edit.model.AccountID}}</div>
+                <div class="small-4 columns">{{::edit.model.Amount}}</div>
+                <div class="small-4 columns">{{::edit.model.TicketID}}</div>
+            </div>
+            <div class="row padding-top">
+                <div class="small-4 columns end">Open Price</div>
+            </div>
+            <div class="row">
+                <div class="small-4 columns end">{{::edit.model.OpenPrice}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-12 columns">
+            <hr>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="small-10 columns">
+            Stop Loss
+        </div>
+        <div class="small-2 columns">
+            <div class="switch small radius">
+                <input class="switch-input" id="smallSwitch" type="checkbox" name="exampleSwitch">
+                <label class="switch-paddle" for="smallSwitch">
+                    <span class="show-for-sr">Small Portions Only</span>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="row padding-top">
+        <div class="small-6 columns">
+            <input type="radio" value="Price" ng-model="edit.model.stopLossOption"> Price
+        </div>
+        <div class="small-6 columns">
+            <input type="text" ng-model="edit.model.stopLossPrice">
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-6 columns">
+            <input type="radio" value="pipsDistance" ng-model="edit.model.stopLossOption"> Distance in Pips
+        </div>
+        <div class="small-6 columns">
+            <input type="text" ng-model="edit.model.distanceInPips">
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-12 columns">
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-11 columns">
+            Take Profit
+        </div>
+        <div class="small-1 columns">
+            ***
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-12 columns">
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-4 columns">
+            <a href="#" class="button expanded">Cancel</a>
+        </div>
+        <div class="small-8 columns">
+            <button type="submit" class="button expanded" ng-click="submitted=true;">Apply</button>
+        </div>
+    </div>
+
+</section>

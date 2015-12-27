@@ -25,7 +25,7 @@
 
                     <div class="name-container">
                         <i class="fa fa-buysellads"></i>
-                        <span class="name">{{::item.SystemName}}</span>
+                        <a class="name" ui-sref="details({positionId: {{::item.PositionID}}})">{{::item.SystemName}}</a>
                     </div>
                     <div class="peer-container">
                         <span class="peer">{{::item.InstrumentName}}</span>
@@ -57,7 +57,7 @@
 
                 <div class="small-3 columns padding-top buttons-container padding-top-half">
                     <div class="padding-bottom-half right-align">
-                        <a href="#" class="button"><i class="fa fa-wrench"></i></a>
+                        <a href="#" class="button" ui-sref="edit({ positionId: item.PositionID })"><i class="fa fa-wrench"></i></a>
                     </div>
                     <div class="right-align">
                         <a href="#" class="button"><i class="fa fa-times"></i></a>
@@ -65,7 +65,5 @@
                 </div>
             </div>
         </div>
-
-
     </li>
 </ul>

@@ -20,7 +20,13 @@
 
             credentials.liveDemo = "1";
 
-            $http.post(constants.DEV.authUrl, credentials).then(success, failed);
+            var headers = {
+                'x-brokerurl': 'http://web.tradency.com/b78/InvastSec'
+            };
+
+            $http.post(constants.DEV.authUrl, credentials, {
+                headers: headers
+            }).then(success, failed);
 
             function success(response) {
 

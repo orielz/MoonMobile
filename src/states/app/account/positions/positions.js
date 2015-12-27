@@ -14,7 +14,19 @@
                 templateUrl: 'states/app/account/positions/positions.html',
                 controller: 'OpenPositionsController',
                 controllerAs: 'Positions'
-            });
+            })
+            .state('details', {
+                url: '/details/{positionId}',
+                templateUrl: 'states/app/account/positions/details/details.html',
+                controller: 'PositionDetailsController',
+                controllerAs: 'details'
+            })
+            .state('edit', {
+                    url: '/edit/{positionId}',
+                    templateUrl: 'states/app/account/positions/edit/edit.html',
+                    controller: 'PositionEditController',
+                    controllerAs: 'edit'
+                });
     }
 
 })(angular.module('tradency.mobile'));

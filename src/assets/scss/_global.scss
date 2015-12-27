@@ -120,7 +120,7 @@
 //
 //}
 
-button.button {
+a.button, button.button {
   border: 1px solid #a0a7b7;
   color: #46495b;
   @include gradient(#ffffff, rgba(255, 255, 255, 0.5));

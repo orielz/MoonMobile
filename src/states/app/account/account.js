@@ -17,7 +17,7 @@
                 controllerAs: 'MyAccount'
             });
 
-        $urlRouterProvider.otherwise('/account/open-positions');
+        $urlRouterProvider.otherwise('/account/open-positions/list');
 
     }
 

@@ -13,7 +13,8 @@
     function openPositionsService($localStorage, $http, constants, positionsModel, $rootScope, utilsService, $interval, $timeout, ratesModel) {
 
         return {
-            getOpenPositions: getOpenPositions
+            getOpenPositions: getOpenPositions,
+            getPosition: getPosition
         };
 
         function getOpenPositions() {
@@ -121,6 +122,10 @@
                 $rootScope.$broadcast('onOpenPositionsPushModel', mock.Message); // SIMULATOR
 
             }, 1000);
+        }
+
+        function getPosition(positionId) {
+            return positionsModel.model[positionId];
         }
 
     }

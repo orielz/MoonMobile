@@ -1,0 +1,62 @@
+<section class="details full-height">
+    <div class="row">
+        <div class="small-12 columns header-row">
+            <i class="fa fa-arrow-left"></i>
+            Open Position
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="small-9 columns padding">
+            <div class="row">
+                <div class="small-12 columns">
+                   <strong>{{::details.model.SystemName}}</strong>
+                </div>
+            </div>
+            <div class="row">
+                <div class="small-12 columns">
+                    {{::details.model.InstrumentName}} {{::details.model.TradePositionTypeName}}
+                </div>
+            </div>
+            <div class="row padding-top-double">
+                <div class="small-4 columns">TicketID</div>
+                <div class="small-4 columns">Open Price</div>
+                <div class="small-4 columns">Pips</div>
+            </div>
+            <div class="row">
+                <div class="small-4 columns">{{::details.model.TicketID}}</div>
+                <div class="small-4 columns">{{::details.model.OpenPrice}}</div>
+                <div class="small-4 columns">{{details.model.Pips}}</div>
+            </div>
+            <div class="row padding-top-double">
+                <div class="small-4 columns">Account ID</div>
+                <div class="small-4 columns">Stop Loss</div>
+                <div class="small-4 columns">Take Profit</div>
+            </div>
+            <div class="row">
+                <div class="small-4 columns">{{::details.model.AccountID}}</div>
+                <div class="small-4 columns">{{::details.model.StopLossRate}}</div>
+                <div class="small-4 columns">{{::details.model.TakeProfitRate}}</div>
+            </div>
+            <div class="row padding-top-double">
+                <div class="small-4 columns">P/L</div>
+                <div class="small-4 columns">Swap</div>
+                <div class="small-4 columns">Commission</div>
+            </div>
+            <div class="row">
+                <div class="small-4 columns">{{details.model.Profit}}</div>
+                <div class="small-4 columns">{{::details.model.Swap}}</div>
+                <div class="small-4 columns">{{::details.model.Commission}}</div>
+            </div>
+        </div>
+        <div class="small-3 columns padding-top-double">
+            <div class="padding-bottom-half right-align">
+                <a ui-sref="edit({ positionId: details.model.PositionID })" class="button"><i class="fa fa-wrench"></i></a>
+            </div>
+            <div class="right-align">
+                <a href="#" class="button"><i class="fa fa-times"></i></a>
+            </div>
+        </div>
+    </div>
+
+</section>

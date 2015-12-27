@@ -11,7 +11,7 @@
         service.responseError = function(response) {
 
             if (response.status == 401) { // 401 == Unauthorized
-                window.location = "/MobilePOC/src/#/login";
+                window.location = "/MoonMobile/src/#/login";
             }
 
             return $q.reject(response);
