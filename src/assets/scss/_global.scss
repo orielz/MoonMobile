@@ -1,3 +1,14 @@
+@import "mixins";
+
+html{
+  min-height: 100%;
+}
+body {
+  min-height: 100%;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #DBE4E7;
+}
+
 /* SPACING */
 .no-padding {
   padding: 0;
@@ -79,47 +90,6 @@
   padding: 2em;
 }
 
-/* BUTTONS STYLE */
-//.button, button {
-//  border-color: #a0a7b7;
-//  border-top-color: rgb(160, 167, 183);
-//  border-right-color: rgb(160, 167, 183);
-//  border-bottom-color: rgb(160, 167, 183);
-//  border-left-color: rgb(160, 167, 183);
-//  border-style: solid;
-//  border-width: 1px;
-//
-//  background: #fff;
-//  background: -moz-linear-gradient(top, #Fefefe 0, #ececec 50%);
-//  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #Fefefe), color-stop(50%, #ececec));
-//  background: -webkit-linear-gradient(top, #Fefefe 0, #ececec 50%);
-//  background: -o-linear-gradient(top, #Fefefe 0, #ececec 50%);
-//  background: -ms-linear-gradient(top, #Fefefe 0, #ececec 50%);
-//  background: linear-gradient(to bottom, #Fefefe 0, #ececec 50%);
-//
-//  -webkit-border-radius: 4px;
-//  -moz-border-radius: 4px;
-//  -ms-border-radius: 4px;
-//  border-radius: 4px;
-//
-//  color: #4B5161;
-//
-//  &:hover {
-//    border-color: #375e97;
-//
-//    background: #fff;
-//    background: -moz-linear-gradient(top, #Fefefe 0, #ececec 50%);
-//    background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #Fefefe), color-stop(50%, #ececec));
-//    background: -webkit-linear-gradient(top, #Fefefe 0, #ececec 50%);
-//    background: -o-linear-gradient(top, #Fefefe 0, #ececec 50%);
-//    background: -ms-linear-gradient(top, #Fefefe 0, #ececec 50%);
-//    background: linear-gradient(to bottom, #Fefefe 0, #ececec 50%);
-//
-//    color: #4B5161;
-//  }
-//
-//}
-
 a.button, button.button {
   border: 1px solid #a0a7b7;
   color: #46495b;
@@ -138,7 +108,7 @@ a.button, button.button {
 }
 
 .full-height {
-  height: 100%;
+  min-height: 100%;
 }
 
 /* Height */
@@ -163,3 +133,66 @@ div.error {
 input.ng-dirty.ng-invalid {
   //border: 1px solid #a94442;
 }
+
+// ng-show hide of expandable area animation
+.expandable-animation.ng-hide {
+  max-height: 0;
+  @include transition(max-height 0.5s);
+  overflow: hidden;
+}
+
+.expandable-animation {
+  max-height: 350px;
+  @include transition(max-height 0.5s);
+  overflow: hidden;
+}
+
+
+select {
+  border-width: 2px;
+  border-color: #a0a7b7;
+  border-style: solid;
+  background-color: #ffffff;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.07);
+}
+
+.white-container {
+  border-style: solid;
+  border-width: 2px;
+  border-color: #d0d4df;
+  background-color: #ffffff;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.07);
+}
+
+.title {
+  font-weight: 600;
+  font-size: 1rem;
+
+  &.middle {
+    padding: 0.3625rem 0;
+  }
+}
+
+[type='checkbox'] + label, [type='radio'] + label {
+  font-size: 1rem;
+}
+
+.switch {
+  margin-bottom: 0;
+}
+
+.trd-button {
+  border-radius: 4px;
+  border: 1px solid #a0a7b7;
+  background-color: #ffffff;
+  @include gradient(#ffffff, rgba(255, 255, 255, 0.5));
+  color: #46495b;
+  font-weight: 600;
+}
+
+
+//.switch-paddle {
+//  background: #ffffff;
+//  @include gradient(rgb(236, 236, 236), rgb(253, 253, 253));
+//  border: 1px solid #a0a7b7;
+//}
