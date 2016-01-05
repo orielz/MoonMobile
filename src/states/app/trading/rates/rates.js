@@ -9,12 +9,17 @@
 
         $stateProvider
             .state('rates', {
-                parent: 'trading',
-                url: '/rates',
-                templateUrl: 'states/app/trading/rates/rates.html',
-                controller: 'RatesController',
-                controllerAs: 'Rates'
-            });
+            parent: 'trading',
+            url: '/rates',
+            templateUrl: 'states/app/trading/rates/rates.html',
+            controller: 'RatesController',
+            controllerAs: 'Rates'
+        }).state('order', {
+            url: '/order/{InstrumentID}/{type}',
+            templateUrl: 'states/app/trading/rates/order/order.html',
+            controller: 'OrderController',
+            controllerAs: 'order'
+        })
     }
 
 })(angular.module('tradency.mobile'));

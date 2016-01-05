@@ -24,7 +24,7 @@
                 'x-brokerurl': 'http://web.tradency.com/b78/InvastSec'
             };
 
-            $http.post(constants.DEV.authUrl, credentials, {
+            $http.post(constants.EP.authUrl, credentials, {
                 headers: headers
             }).then(success, failed);
 

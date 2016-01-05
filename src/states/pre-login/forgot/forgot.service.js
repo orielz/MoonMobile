@@ -28,7 +28,7 @@
 
             var deferred = $q.defer();
 
-            $http.post(constants.DEV.createConfirmationCodeUrl, model).then(success, failed);
+            $http.post(constants.EP.createConfirmationCodeUrl, model).then(success, failed);
 
             function success(response) {
 
@@ -57,7 +57,7 @@
 
             var deferred = $q.defer();
 
-            $http.post(constants.DEV.isConfirmationCodeValidUrl, model).then(success, failed);
+            $http.post(constants.EP.isConfirmationCodeValidUrl, model).then(success, failed);
 
             function success(response) {
 
@@ -86,7 +86,7 @@
 
             var deferred = $q.defer();
 
-            $http.post(constants.DEV.updateNewPasswordUrl, model).then(success, failed);
+            $http.post(constants.EP.updateNewPasswordUrl, model).then(success, failed);
 
             function success(response) {
 

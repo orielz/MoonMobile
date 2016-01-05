@@ -13,13 +13,14 @@
     function ratesService($localStorage, $http, $rootScope, constants, ratesModel, $interval, utilsService, $timeout) {
 
         return {
-            getRates: getRates
+            getRates: getRates,
+            getRate: getRate
         };
 
         function getRates() {
 
-            var getRatesUrl = constants.DEV.getRatesUrl;
-            var getSpreadsUrl = constants.DEV.getSpreadsUrl;
+            var getRatesUrl = constants.EP.getRatesUrl;
+            var getSpreadsUrl = constants.EP.getSpreadsUrl;
 
             var accountId = $localStorage.accountId;
             var userId = $localStorage.userData.UserID;
@@ -32,6 +33,10 @@
             return $http.post(getRatesUrl, {AccountID: accountId})
                 .then(addRates)
                 .then(registerEventListeners);
+        }
+
+        function getRate(InstrumentID) {
+            return ratesModel.model[InstrumentID];
         }
 
         // Add ajax response to persistence model

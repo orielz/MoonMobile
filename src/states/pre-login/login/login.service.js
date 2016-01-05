@@ -26,7 +26,7 @@
 
             var deferred = $q.defer();
 
-            $http.post(constants.DEV.getMobileBrokersListUrl, {ProductID: constants.DEV.mobileProductId}).then(success, failed);
+            $http.post(constants.EP.getMobileBrokersListUrl, {ProductID: constants.EP.mobileProductId}).then(success, failed);
 
             function success(response) {
 

@@ -9,7 +9,8 @@
 
         return {
             addOrUpdateList: addOrUpdateList,
-            addOrUpdateSingle: addOrUpdateSingle
+            addOrUpdateSingle: addOrUpdateSingle,
+            getOtherThan: getOtherThan
         };
 
         /*
@@ -74,6 +75,20 @@
                 _.assign(model, item); // Update an existing model
             else if (listToUpdate)
                 listToUpdate[modelId] = item;
+        }
+
+        function getOtherThan(items, key) {
+
+            var result = [];
+
+            _.each(items, function (item) {
+                if (item.toString() != key) {
+                    result.push(item);
+                }
+            });
+
+            return result;
+
         }
 
 

@@ -19,31 +19,40 @@
             var deferred = $q.defer();
 
             var socket = {
-                connection:  $.hubConnection()
+                connection: $.hubConnection()
             };
 
-            socket.connection.url = constants.DEV.signalRUrl;
+            socket.connection.url = constants.EP.signalRUrl;
             socket.hub = socket.connection.createHubProxy('tradencyHub');
 
             socket.connection.start().done(function () {
                 var token = $localStorage.token;
-                socket.hub.invoke( 'Login', token );
+                socket.hub.invoke('Login', token);
                 deferred.resolve();
             });
 
-            socket.hub.on('pushRates' , function (data) {
-                var model = JSON.parse(data).Rate;
-                $rootScope.$broadcast('onRatesPushModel', model);
+            socket.hub.on('pushRates', function (data) {
+
+                if (!data)
+                    return;
+
+                try {
+                    var model = JSON.parse(data).Rate;
+                    $rootScope.$broadcast('onRatesPushModel', model);
+                } catch (e) {
+
+                }
+
+
             });
 
-            socket.hub.on('onPushOpenPosition' , function (data) {
+            socket.hub.on('onPushOpenPosition', function (data) {
                 var model = JSON.parse(data).Rate;
                 $rootScope.$broadcast('onOpenPositionsPushModel', model);
             });
 
             return deferred.promise;
         }
-
 
 
     }

@@ -9,6 +9,7 @@
 
     <!-- Style -->
     <link rel="stylesheet" href="../node_modules/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="../node_modules/npm-font-open-sans/open-sans.css">
 
     <!-- build:css css/app.css -->
     <link rel="stylesheet" href="assets/scss/app.css">
@@ -20,6 +21,7 @@
     <link rel="stylesheet" href="components/menu-bar/menu-bar.css">
     <link rel="stylesheet" href="states/app/trading/rates/rates.css">
     <link rel="stylesheet" href="states/app/account/positions/positions.css">
+    <link rel="stylesheet" href="states/app/trading/rates/order/order.css">
     <link rel="stylesheet" href="components/symbol-list/symbol-list.css">
     <link rel="stylesheet" href="components/positions-list/positions-list.css">
     <!-- endbuild -->
@@ -27,7 +29,9 @@
     <!-- Vendor -->
     <script src="../node_modules/jquery/dist/jquery.js"></script>
     <script src="../node_modules/angular/angular.js"></script>
+    <script src="../node_modules/angular-animate/angular-animate.js"></script>
     <script src="../node_modules/foundation-sites/dist/foundation.js"></script>
+    <script src="../node_modules/motion-ui/dist/motion-ui.js"></script>
     <script src="../node_modules/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="../node_modules/ngstorage/ngStorage.js"></script>
     <script src="../node_modules/ms-signalr-client/jquery.signalr-2.2.0.js"></script>
@@ -72,6 +76,8 @@
     <script src="states/app/trading/rates/rates.controller.js"></script>
     <script src="states/app/trading/rates/rates.js"></script>
 
+    <script src="states/app/trading/rates/order/order.controller.js"></script>
+
     <script src="states/app/account/account.controller.js"></script>
     <script src="states/app/account/account.js"></script>
 
@@ -89,6 +95,10 @@
     <script src="common/services/interceptor.service.js"></script>
     <script src="states/app/layout.js"></script>
     <script src="common/services/signalr.service.js"></script>
+    <script src="common/services/attributes.service.js"></script>
+    <script src="common/services/translation.service.js"></script>
+    <script src="common/services/restrictions.service.js"></script>
+    <script src="common/directives/jump-size.validator.directive.js"></script>
     <!-- endbuild -->
 
 </head>

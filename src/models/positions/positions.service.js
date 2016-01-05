@@ -20,7 +20,7 @@
         function getOpenPositions() {
 
             var accountId = $localStorage.accountId;
-            var getOpenPositionsUrl = constants.DEV.getOpenPositions;
+            var getOpenPositionsUrl = constants.EP.getOpenPositions;
 
             return $http.post(getOpenPositionsUrl, {AccountID: accountId})
                 .then(addToModel)

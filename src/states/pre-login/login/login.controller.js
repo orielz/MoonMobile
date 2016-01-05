@@ -3,9 +3,9 @@
  */
 (function (app) {
 
-    app.controller('LoginController', ['authService', '$state', 'loginService', LoginController]);
+    app.controller('LoginController', ['authService', '$state', 'loginService', 'attributesService', 'constants', 'translationService', '$q', 'restrictionsService', LoginController]);
 
-    function LoginController(authService, $state, loginService) {
+    function LoginController(authService, $state, loginService, attributesService, constants, translationService, $q, restrictionsService) {
 
         var vm = this;
         vm.credentials = {};
@@ -28,7 +28,7 @@
 
         }
 
-        vm.login = function(form) {
+        vm.login = function (form) {
 
             if (form.$invalid)
                 return;
@@ -42,6 +42,33 @@
 
         function authFailed(err) {
             vm.loginError = err;
+        }
+
+        vm.getAttributesByBroker = function (broker) {
+
+            var attributesPromise = attributesService.getGroupAttributes({
+                BrokerID: broker.brokerID,
+                ProductID: constants.EP.mobileProductId
+            });
+
+            restrictionsService.buildRestrictions({
+                BrokerID: broker.brokerID,
+                ProductID: constants.EP.mobileProductId,
+                LocationsIDs:21
+            });
+
+            var translationPromise = translationService.getTranslations({
+                BrokerID: broker.brokerID,
+                ProductID: constants.EP.mobileProductId,
+                Culture: "en-US"
+            });
+
+            $q.all([attributesPromise, translationPromise])
+                .then(function () {
+                    vm.brokerLoaded = true;
+
+                });
+
         }
 
     }

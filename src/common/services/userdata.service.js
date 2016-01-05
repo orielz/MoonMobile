@@ -15,7 +15,7 @@
         };
 
         function getUserData() {
-            return $http.post(constants.DEV.getUserDataUrl, {LiveDemo: "1", HostName: "ILDEVWEB01"}).then(onUserData, userDataFailed);
+            return $http.post(constants.EP.getUserDataUrl, {LiveDemo: "1", HostName: "ILDEVWEB01"}).then(onUserData, userDataFailed);
         }
 
         function onUserData(response) {

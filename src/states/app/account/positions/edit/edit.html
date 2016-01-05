@@ -48,40 +48,72 @@
         </div>
         <div class="small-2 columns">
             <div class="switch small radius">
-                <input class="switch-input" id="smallSwitch" type="checkbox" name="exampleSwitch">
-                <label class="switch-paddle" for="smallSwitch">
-                    <span class="show-for-sr">Small Portions Only</span>
+                <input class="switch-input" id="stopLossSwitch" type="checkbox" name="stopLossSwitch" ng-model="edit.showStopLoss" ng-change="edit.stopLossChanged()">
+                <label class="switch-paddle" for="stopLossSwitch">
+                    <span class="switch-active" aria-hidden="true"></span>
+                    <span class="switch-inactive" aria-hidden="true"></span>
                 </label>
             </div>
         </div>
     </div>
-    <div class="row padding-top">
-        <div class="small-6 columns">
-            <input type="radio" value="Price" ng-model="edit.model.stopLossOption"> Price
-        </div>
-        <div class="small-6 columns">
-            <input type="text" ng-model="edit.model.stopLossPrice">
+    <div class="row expandable-animation" ng-show="edit.showStopLoss">
+        <div class="columns small-12">
+            <div class="row padding-top">
+                <div class="small-6 columns">
+                    <input type="radio" value="Price" ng-model="edit.model.stopLossOption"> Price
+                </div>
+                <div class="small-6 columns">
+                    <input type="text" ng-model="edit.model.stopLossPrice">
+                </div>
+            </div>
+            <div class="row">
+                <div class="small-6 columns">
+                    <input type="radio" value="pipsDistance" ng-model="edit.model.stopLossOption"> Distance in Pips
+                </div>
+                <div class="small-6 columns">
+                    <input type="text" ng-model="edit.model.stopLossDistanceInPips">
+                </div>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="small-6 columns">
-            <input type="radio" value="pipsDistance" ng-model="edit.model.stopLossOption"> Distance in Pips
-        </div>
-        <div class="small-6 columns">
-            <input type="text" ng-model="edit.model.distanceInPips">
-        </div>
-    </div>
+
     <div class="row">
         <div class="small-12 columns">
             <hr>
         </div>
     </div>
     <div class="row">
-        <div class="small-11 columns">
+        <div class="small-10 columns">
             Take Profit
         </div>
-        <div class="small-1 columns">
-            ***
+        <div class="small-2 columns">
+            <div class="switch small radius">
+                <input class="switch-input" id="takeProfitSwitch" type="checkbox" name="takeProfitSwitch" ng-model="edit.showTakeProfit" ng-change="edit.takeProfitChanges()">
+                <label class="switch-paddle" for="takeProfitSwitch">
+                    <span class="switch-active" aria-hidden="true"></span>
+                    <span class="switch-inactive" aria-hidden="true"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="row expandable-animation" ng-show="edit.showTakeProfit">
+        <div class="columns small-12">
+            <div class="row padding-top">
+                <div class="small-6 columns">
+                    <input type="radio" value="Price" ng-model="edit.model.TakeProfitOption"> Price
+                </div>
+                <div class="small-6 columns">
+                    <input type="text" ng-model="edit.model.takeProfitStopLossPrice">
+                </div>
+            </div>
+            <div class="row">
+                <div class="small-6 columns">
+                    <input type="radio" value="pipsDistance" ng-model="edit.model.TakeProfitOption"> Distance in Pips
+                </div>
+                <div class="small-6 columns">
+                    <input type="text" ng-model="edit.model.takeProfitDistanceInPips">
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
