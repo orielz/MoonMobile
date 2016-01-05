@@ -1,7 +1,10 @@
 @charset 'utf-8';
 
-@import 'mixins';
+//@import 'mixins';
+
 @import 'settings';
+
+@import 'custom-settings';
 @import '../../../node_modules/foundation-sites/scss/foundation';
 @import '../../../node_modules/motion-ui/motion-ui';
 
@@ -45,4 +48,3 @@
 @include motion-ui-animations;
 
 @import 'global';
-@import 'custom-settings';

@@ -1,4 +1,22 @@
 @charset "UTF-8";
+/* Define mobile styles */
+@media only screen and (max-width: 40em) {
+  html {
+    font-size: 14px; } }
+/* max-width 640px, mobile-only styles, use when QAing mobile issues */
+@media only screen and (min-width: 40.063em) {
+  html {
+    font-size: 15px; } }
+/* min-width 641px, medium screens */
+/* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
+@media only screen and (min-width: 64.063em) {
+  html {
+    font-size: 16px; } }
+/* min-width 1025px, large screens */
+/* min-width 1025px and max-width 1440px, use when QAing large screen-only issues */
+/* min-width 1441px, xlarge screens */
+/* min-width 1441px and max-width 1920px, use when QAing xlarge screen-only issues */
+/* min-width 1921px, xxlarge screens */
 /**
  * Foundation for Sites by ZURB
  * Version 6.0.6
@@ -3955,6 +3973,14 @@ table.hover tr:nth-of-type(even):hover {
 .long-delay {
   animation-delay: 700ms !important; }
 
+html {
+  min-height: 100%; }
+
+body {
+  min-height: 100%;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #DBE4E7; }
+
 /* SPACING */
 .no-padding {
   padding: 0; }
@@ -4016,7 +4042,6 @@ table.hover tr:nth-of-type(even):hover {
 .padding-double {
   padding: 2em; }
 
-/* BUTTONS STYLE */
 a.button, button.button {
   border: 1px solid #a0a7b7;
   color: #46495b;
@@ -4039,7 +4064,7 @@ a.button, button.button {
   padding: 1rem; }
 
 .full-height {
-  height: 100%; }
+  min-height: 100%; }
 
 /* Height */
 .center-align {
@@ -4056,21 +4081,59 @@ div.error {
   font-size: 0.9rem;
   color: #a94442; }
 
-/* Define mobile styles */
-@media only screen and (max-width: 40em) {
-  html {
-    font-size: 14px; } }
-/* max-width 640px, mobile-only styles, use when QAing mobile issues */
-@media only screen and (min-width: 40.063em) {
-  html {
-    font-size: 15px; } }
-/* min-width 641px, medium screens */
-/* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
-@media only screen and (min-width: 64.063em) {
-  html {
-    font-size: 16px; } }
-/* min-width 1025px, large screens */
-/* min-width 1025px and max-width 1440px, use when QAing large screen-only issues */
-/* min-width 1441px, xlarge screens */
-/* min-width 1441px and max-width 1920px, use when QAing xlarge screen-only issues */
-/* min-width 1921px, xxlarge screens */
+.expandable-animation.ng-hide {
+  max-height: 0;
+  -moz-transition: max-height 0.5s;
+  -o-transition: max-height 0.5s;
+  -webkit-transition: max-height 0.5s;
+  transition: max-height 0.5s;
+  overflow: hidden; }
+
+.expandable-animation {
+  max-height: 350px;
+  -moz-transition: max-height 0.5s;
+  -o-transition: max-height 0.5s;
+  -webkit-transition: max-height 0.5s;
+  transition: max-height 0.5s;
+  overflow: hidden; }
+
+select {
+  border-width: 2px;
+  border-color: #a0a7b7;
+  border-style: solid;
+  background-color: #ffffff;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.07); }
+
+.white-container {
+  border-style: solid;
+  border-width: 2px;
+  border-color: #d0d4df;
+  background-color: #ffffff;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.07); }
+
+.title {
+  font-weight: 600;
+  font-size: 1rem; }
+  .title.middle {
+    padding: 0.3625rem 0; }
+
+[type='checkbox'] + label, [type='radio'] + label {
+  font-size: 1rem; }
+
+.switch {
+  margin-bottom: 0; }
+
+.trd-button {
+  border-radius: 4px;
+  border: 1px solid #a0a7b7;
+  background-color: #ffffff;
+  background: #ffffff;
+  background: -moz-linear-gradient(top, #ffffff 0, rgba(255, 255, 255, 0.5) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ffffff), color-stop(100%, rgba(255, 255, 255, 0.5)));
+  background: -webkit-linear-gradient(top, #ffffff 0, rgba(255, 255, 255, 0.5) 100%);
+  background: -o-linear-gradient(top, #ffffff 0, rgba(255, 255, 255, 0.5) 100%);
+  background: -ms-linear-gradient(top, #ffffff 0, rgba(255, 255, 255, 0.5) 100%);
+  background: linear-gradient(to bottom, #ffffff 0, rgba(255, 255, 255, 0.5) 100%);
+  filter: "progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='rgba(255, 255, 255, 0.5)',GradientType=0 )";
+  color: #46495b;
+  font-weight: 600; }
