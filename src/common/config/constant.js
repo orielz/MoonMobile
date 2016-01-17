@@ -25,13 +25,14 @@
             2: '_MINI',
             3: '_STANDARD'
         },
+        orderActions: {
+            1: 'Sell',
+            2: 'Buy'
+        },
         orderTypes: {
-            1: 'Buy',
-            2: 'Sell',
-            3: 'Buy Limit',
-            4: 'Sell Limit',
-            5: 'Buy Stop',
-            6: 'Sell Stop'
+            1: 'Market',
+            2: 'Stop',
+            3: 'Limit'
         }
 
 
