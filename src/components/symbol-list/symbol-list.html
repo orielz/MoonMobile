@@ -8,20 +8,7 @@
                 <div class="name padding-left padding-top padding-bottom">{{::item.InstrumentName}}</div>
 
                 <span class="pull-right padding-top-half">
-                    <button ng-class="{'up':item.BidDiff < 0,'down':item.BidDiff > 0}" class="button padding-half" ui-sref="order({ InstrumentID: item.InstrumentID, type: 2 })">
-                        <div class="title">
-                            <i class="fa fa-arrow-down"></i>
-                            <span class="text">Sell</span>
-                        </div>
-
-                        <div class="pips">
-                            {{item.Bid}}
-                        </div>
-                    </button>
-                </span>
-
-                <span class="pull-right padding-top-half">
-                    <button ng-class="{'up':item.AskDiff < 0,'down':item.AskDiff > 0}" class="button padding-half" ui-sref="order({ InstrumentID: item.InstrumentID, type: 1 })">
+                    <button ng-class="{'up':item.AskDiff < 0,'down':item.AskDiff > 0}" class="button padding-half" ui-sref="order({ InstrumentID: item.InstrumentID, type: 2 })">
                         <span class="title">
                             <i class="fa fa-arrow-up"></i>
                             <span class="text">Buy</span>
@@ -29,6 +16,19 @@
 
                         <div class="pips">
                             {{item.Ask}}
+                        </div>
+                    </button>
+                </span>
+
+                <span class="pull-right padding-top-half">
+                    <button ng-class="{'up':item.BidDiff < 0,'down':item.BidDiff > 0}" class="button padding-half" ui-sref="order({ InstrumentID: item.InstrumentID, type: 1 })">
+                        <div class="title">
+                            <i class="fa fa-arrow-down"></i>
+                            <span class="text">Sell</span>
+                        </div>
+
+                        <div class="pips">
+                            {{item.Bid}}
                         </div>
                     </button>
                 </span>
