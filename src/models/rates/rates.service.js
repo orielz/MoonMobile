@@ -8,9 +8,9 @@
     var worker = null;
     var isWorkerInProgress = false;
 
-    app.factory(serviceId, ['$localStorage', '$http', '$rootScope', 'constants', 'ratesModel', '$interval', 'utilsService', '$timeout', ratesService]);
+    app.factory(serviceId, ['$localStorage', '$http', '$rootScope', 'constants', 'ratesModel', '$interval', 'utilsService', '$timeout', 'forexService', ratesService]);
 
-    function ratesService($localStorage, $http, $rootScope, constants, ratesModel, $interval, utilsService, $timeout) {
+    function ratesService($localStorage, $http, $rootScope, constants, ratesModel, $interval, utilsService, $timeout, forexService) {
 
         return {
             getRates: getRates,
@@ -44,6 +44,11 @@
             // Loop through the response.data array and convert it to an object list
             // This is done in order to access properties by ID and not loop all over the array to find an item
             _.each(response.data, function (rate) {
+
+                rate.precision = forexService.getPrecision(rate.Coif);
+                rate.pipSize = forexService.getPipSize(rate.Coif);
+                rate.onePipValue = forexService.getOnePipsValue(rate.pipSize);
+
                 ratesModel.model[rate.InstrumentID] = rate;
             });
         }
