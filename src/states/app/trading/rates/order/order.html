@@ -11,7 +11,7 @@
         <div class="row">
             <div class="small-12 columns padding-top">
                 <select ng-options="o as o.InstrumentName for o in order.ratesModel track by o.InstrumentID"
-                        ng-model="order.selectedRate" ng-change="order.rateChanged(order.selectedRate)" name="rate"
+                        ng-model="order.rate" ng-change="order.rateChanged(order.rate)" name="rate"
                         required/>
             </div>
         </div>
@@ -21,11 +21,11 @@
                 <div class="white-container padding-left padding-top-half padding-right">
                     <div class="row">
                         <div class="small-12 columns">
-                            <input type="radio" name="BuyOrSell" value="Sell" id="sell" ng-model="order.model.sellOrBuy">
+                            <input type="radio" name="BuyOrSell" value="Sell" id="sell" ng-model="order.model.action">
                             <label for="sell">Sell</label>
                         </div>
                         <div class="small-12 columns">
-                            <input type="radio" name="BuyOrSell" value="Buy" id="buy" ng-model="order.model.sellOrBuy">
+                            <input type="radio" name="BuyOrSell" value="Buy" id="buy" ng-model="order.model.action">
                             <label for="buy">Buy</label>
                         </div>
                     </div>
@@ -41,7 +41,11 @@
                             <label for="amount" class="middle title">Amount</label>
                         </div>
                         <div class="columns small-9">
-                            <input type="number" id="amount" ng-model="order.model.amount" min="{{order.restrictions.MINIMUM_AMOUNT}}" max="{{order.restrictions.MAXIMUM_AMOUNT}}" jump-size="{{order.restrictions.AMOUNT_JUMPS}}" ng-init="order.model.amount = order.restrictions.DEFAULT_AMOUNT">
+                            <input type="number" id="amount" ng-model="order.model.amount"
+                                   step="{{order.restrictions.AMOUNT_JUMPS}}"
+                                   min="{{order.restrictions.MINIMUM_AMOUNT}}"
+                                   max="{{order.restrictions.MAXIMUM_AMOUNT}}"
+                                   ng-init="order.model.amount = order.restrictions.DEFAULT_AMOUNT">
                         </div>
                     </div>
                 </div>
@@ -55,11 +59,18 @@
                         <fieldset class="small-12 columns">
                             <legend class="title">Order Type</legend>
                             <div class="row">
-                                <div class="small-12 columns"><input type="radio" name="orderType" value="Market"
-                                                                     id="market" ng-model="order.model.orderType" ng-change="order.orderTypeChanged(order.model.orderType)"><label
-                                        for="market">Market</label></div>
-                                <div class="small-12 columns"><input type="radio" name="orderType" value="Entry"
-                                                                     ng-model="order.model.orderType" id="entry"><label for="entry">Entry</label></div>
+                                <div class="small-12 columns">
+                                    <input type="radio" name="orderType" value="Market" id="market" ng-model="order.model.orderType" ng-change="order.orderTypeChanged(order.model.orderType)" ng-init="order.model.orderType = 'Market'">
+                                    <label for="market">Market</label>
+                                </div>
+                                <div class="small-12 columns">
+                                    <input type="radio" name="orderType" value="Stop"  id="stop" ng-model="order.model.orderType" ng-change="order.orderTypeChanged(order.model.orderType)">
+                                    <label for="stop">Stop</label>
+                                </div>
+                                <div class="small-12 columns">
+                                    <input type="radio" name="orderType" value="Limit"  id="limit" ng-model="order.model.orderType" ng-change="order.orderTypeChanged(order.model.orderType)">
+                                    <label for="limit">Limit</label>
+                                </div>
                             </div>
                         </fieldset>
                     </div>
@@ -67,7 +78,7 @@
             </div>
         </div>
 
-        <div class="row" ng-show="order.model.orderType === 'Entry'">
+        <div class="row" ng-show="order.model.orderType === 'Stop' || order.model.orderType === 'Limit'">
             <div class="small-12 columns padding-top">
                 <div class="white-container padding-left padding-top padding-right">
                     <div class="row">
@@ -75,7 +86,8 @@
                             <label for="entryPrice" class="middle title">Entry Price</label>
                         </div>
                         <div class="columns small-7">
-                            <input type="text" id="entryPrice" ng-model="order.model.entryPrice">
+                            <input type="number" id="entryPrice" ng-model="order.model.entryPrice" data-action="order.model.action" data-order-type="order.model.orderType"
+                                   data-rate="order.rate" data-restrictions="order.restrictions" entry-price />
                         </div>
                     </div>
                 </div>
@@ -102,26 +114,30 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row expandable-animation" ng-show="order.showStopLoss">
+                    <div class="row expandable-animation" ng-show="order.showStopLoss" spinner-container
+                         data-action="order.model.action" data-order-type="order.model.orderType" data-component="stoploss"
+                         data-rate="order.rate" data-restrictions="order.restrictions" entry-price-model="order.model.entryPrice">
+
                         <div class="columns small-12">
                             <div class="row padding-top">
                                 <div class="small-7 columns">
-                                    <input type="radio" name="stopLoss" value="Price" id="stopLossPriceCheck"
+                                    <input type="radio" name="stopLoss" value="price" id="stopLossPriceCheck"
                                            ng-model="order.model.stopLossOption">
                                     <label for="stopLossPriceCheck" class="middle">Price</label>
                                 </div>
                                 <div class="small-5 columns">
-                                    <input type="text" ng-model="edit.model.stopLossPrice">
+                                    <input type="number" ng-model="order.model.stopLossPrice" numeric-price ng-disabled="order.model.stopLossOption != 'price'" step="{{order.rate.onePipValue}}">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="small-7 columns">
                                     <input type="radio" name="stopLoss" value="pipsDistance" id="pipsInDistanceCheck"
-                                           ng-model="edit.model.stopLossOption">
+                                           ng-model="order.model.stopLossOption">
                                     <label for="pipsInDistanceCheck" class="middle">Distance in Pips</label>
                                 </div>
                                 <div class="small-5 columns">
-                                    <input type="text" ng-model="edit.model.stopLossDistanceInPips">
+                                    <input type="number" ng-model="order.model.stopLossDistanceInPips" numeric-spinner
+                                           ng-disabled="order.model.stopLossOption != 'pipsDistance'">
                                 </div>
                             </div>
                         </div>
@@ -151,26 +167,28 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row expandable-animation" ng-show="order.showTakeProfit">
+                    <div class="row expandable-animation" ng-show="order.showTakeProfit" spinner-container
+                         data-action="order.model.action" data-order-type="order.model.orderType" data-component="takeprofit"
+                         data-rate="order.rate" data-restrictions="order.restrictions" entry-price-model="order.model.entryPrice">
                         <div class="columns small-12">
                             <div class="row padding-top">
                                 <div class="small-7 columns">
-                                    <input type="radio" name="takeProfit" value="Price" id="takeProfitPriceCheck"
+                                    <input type="radio" name="takeProfit" value="price" id="takeProfitPriceCheck"
                                            ng-model="order.model.takeProfitOption">
                                     <label for="takeProfitPriceCheck" class="middle">Price</label>
                                 </div>
                                 <div class="small-5 columns">
-                                    <input type="text" ng-model="edit.model.takeProfitPrice">
+                                    <input type="number" ng-model="order.model.takeProfitPrice" numeric-price ng-disabled="order.model.takeProfitOption != 'price'" step="{{order.rate.onePipValue}}">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="small-7 columns">
                                     <input type="radio" name="takeProfit" value="pipsDistance"
-                                           id="takeProfitPipsInDistanceCheck" ng-model="edit.model.takeProfitOption">
+                                           id="takeProfitPipsInDistanceCheck" ng-model="order.model.takeProfitOption">
                                     <label for="takeProfitPipsInDistanceCheck" class="middle">Distance in Pips</label>
                                 </div>
                                 <div class="small-5 columns">
-                                    <input type="text" ng-model="edit.model.takeProfitDistanceInPips">
+                                    <input type="number" ng-model="order.model.takeProfitDistanceInPips" numeric-spinner ng-disabled="order.model.takeProfitOption != 'pipsDistance'">
                                 </div>
                             </div>
                         </div>
@@ -179,71 +197,71 @@
             </div>
         </div>
 
-        <div class="row" ng-show="order.model.orderType === 'Entry'">
-            <div class="small-12 columns padding-top">
-                <div class="white-container padding-left padding-top padding-right">
+        <!--<div class="row" ng-show="order.model.orderType === 'Stop' || order.model.orderType === 'Limit'">-->
+            <!--<div class="small-12 columns padding-top">-->
+                <!--<div class="white-container padding-left padding-top padding-right">-->
 
-                    <div class="row">
-                        <div class="small-8 columns title">
-                            Expiration
-                        </div>
-                        <div class="small-4 columns">
-                            <div class="switch small radius padding-bottom-half padding-right-quarter pull-right">
-                                <input class="switch-input" id="expirationSwitch" type="checkbox"
-                                       name="expirationSwitch"
-                                       ng-model="order.showExpiration" ng-change="order.expirationChanged()">
-                                <label class="switch-paddle" for="expirationSwitch">
-                                    <span class="switch-active" aria-hidden="true"></span>
-                                    <span class="switch-inactive" aria-hidden="true"></span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row expandable-animation" ng-show="order.showExpiration">
-                        <div class="columns small-12">
-                            <div class="row">
-                                <div class="small-12 columns">
-                                    <input type="radio" name="expirationCheck" value="GTC" id="gtcCheck"
-                                           ng-model="order.model.expirationGTC">
-                                    <label for="gtcCheck" class="middle">GTC</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="small-12 columns">
-                                    <input type="radio" name="expirationCheck" value="Day" id="dayCheck"
-                                           ng-model="order.model.expirationDay">
-                                    <label for="dayCheck" class="middle">Day</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="small-12 columns">
-                                    <input type="radio" name="expirationCheck" value="Week" id="weekCheck"
-                                           ng-model="order.model.expirationWeek">
-                                    <label for="weekCheck" class="middle">Week</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="small-12 columns">
-                                    <input type="radio" name="expirationCheck" value="GTDH" id="GTDHCheck"
-                                           ng-model="order.model.expirationGTDH">
-                                    <label for="GTDHCheck" class="middle">GTDH</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="small-offset-1 small-5 columns">
-                                    <input type="text" id="GTDHDate" ng-model="order.model.gtdhDate"
-                                           placeholder="Date..">
-                                </div>
-                                <div class="small-6 columns">
-                                    <input type="text" id="GTDHTime" ng-model="order.model.gtdhTime"
-                                           placeholder="Time..">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    <!--<div class="row">-->
+                        <!--<div class="small-8 columns title">-->
+                            <!--Expiration-->
+                        <!--</div>-->
+                        <!--<div class="small-4 columns">-->
+                            <!--<div class="switch small radius padding-bottom-half padding-right-quarter pull-right">-->
+                                <!--<input class="switch-input" id="expirationSwitch" type="checkbox"-->
+                                       <!--name="expirationSwitch"-->
+                                       <!--ng-model="order.showExpiration" ng-change="order.expirationChanged()">-->
+                                <!--<label class="switch-paddle" for="expirationSwitch">-->
+                                    <!--<span class="switch-active" aria-hidden="true"></span>-->
+                                    <!--<span class="switch-inactive" aria-hidden="true"></span>-->
+                                <!--</label>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="row expandable-animation" ng-show="order.showExpiration">-->
+                        <!--<div class="columns small-12">-->
+                            <!--<div class="row">-->
+                                <!--<div class="small-12 columns">-->
+                                    <!--<input type="radio" name="expirationCheck" value="GTC" id="gtcCheck"-->
+                                           <!--ng-model="order.model.expirationGTC">-->
+                                    <!--<label for="gtcCheck" class="middle">GTC</label>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="row">-->
+                                <!--<div class="small-12 columns">-->
+                                    <!--<input type="radio" name="expirationCheck" value="Day" id="dayCheck"-->
+                                           <!--ng-model="order.model.expirationDay">-->
+                                    <!--<label for="dayCheck" class="middle">Day</label>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="row">-->
+                                <!--<div class="small-12 columns">-->
+                                    <!--<input type="radio" name="expirationCheck" value="Week" id="weekCheck"-->
+                                           <!--ng-model="order.model.expirationWeek">-->
+                                    <!--<label for="weekCheck" class="middle">Week</label>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="row">-->
+                                <!--<div class="small-12 columns">-->
+                                    <!--<input type="radio" name="expirationCheck" value="GTDH" id="GTDHCheck"-->
+                                           <!--ng-model="order.model.expirationGTDH">-->
+                                    <!--<label for="GTDHCheck" class="middle">GTDH</label>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="row">-->
+                                <!--<div class="small-offset-1 small-5 columns">-->
+                                    <!--<input type="text" id="GTDHDate" ng-model="order.model.gtdhDate"-->
+                                           <!--placeholder="Date..">-->
+                                <!--</div>-->
+                                <!--<div class="small-6 columns">-->
+                                    <!--<input type="text" id="GTDHTime" ng-model="order.model.gtdhTime"-->
+                                           <!--placeholder="Time..">-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
 
         <div class="row">
             <div class="small-5 columns padding-top">
