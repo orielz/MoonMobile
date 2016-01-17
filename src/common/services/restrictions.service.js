@@ -42,7 +42,8 @@
                 var attribute = attributes[attr];
 
                 // Add relevant restrictions by account type
-                if (_.contains(attribute.AttributeName, accountType)) {
+
+                if (_.endsWith(attribute.AttributeName, accountType)) {
 
                     addAttribute(attribute.AttributeName, attribute.AttributeValue, accountType);
                     continue;
@@ -52,7 +53,7 @@
                 var isGlobalAttribute = true;
 
                 _.each(otherAccountTypes, function (accountType) {
-                    if (_.contains(attribute.AttributeName, accountType)) {
+                    if (_.endsWith(attribute.AttributeName, accountType)) {
                         isGlobalAttribute = false;
                     }
                 });
