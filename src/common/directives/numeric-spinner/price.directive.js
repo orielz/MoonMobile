@@ -44,30 +44,35 @@
                 if (!data)
                     return;
 
-                ctrl.$setViewValue(data.default);
+                if (data.max)
+                    scope.max = data.max;
+                if (data.min)
+                    scope.min = data.min;
+
+                elem.attr('compiled', true);
+
                 isInnerChange = true;
 
-                if (data.max)
-                    elem.attr('max', data.max);
-                if (data.min)
-                    elem.attr('min', data.min);
-
-                ctrl.$render();
-                elem.attr('compiled', true);
-                $compile(elem)(scope);
+                $timeout(function () {
+                    ctrl.$setViewValue(data.default.toString());
+                    ctrl.$render();
+                }, 0);
             };
 
-            // Get init values
-            var data = parentCtrl.init();
-            // Init the controls with values
-            ctrl.set(data);
+            $timeout(function () {
+                // Get init values
+                var data = parentCtrl.init();
+                // Init the controls with values
+                ctrl.set(data);
+            }, 0);
+
 
             /*
              * Listen to changes on price field and update the pips accordingly
              */
             scope.$watch(attrs.ngModel, function (newVal, oldVal) {
 
-                $timeout(function() {
+                $timeout(function () {
 
                     if (newVal && newVal != oldVal && !isInnerChange && ctrl.$valid) {
                         parentCtrl.priceChanged(newVal, ctrl);
@@ -75,7 +80,7 @@
 
                     isInnerChange = false;
 
-                },0);
+                }, 0);
 
             });
         }

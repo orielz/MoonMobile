@@ -3,12 +3,14 @@
  */
 (function (app) {
 
-    app.directive('entryPrice', ['$timeout', '$parse', 'validationHelperService', '$compile','$compile', entryPrice]);
+    app.directive('entryPrice', ['$timeout', '$parse', 'validationHelperService', '$compile', '$compile', entryPrice]);
 
     function entryPrice($timeout, $parse, validationHelperService, $compile) {
 
         return {
             require: 'ngModel',
+            scope: true,
+            priority: 1,
             link: link
         };
 
@@ -28,7 +30,6 @@
 
             function recompile() {
 
-                var compile = false;
                 var action = $parse(attrs.action)(scope);
                 var rate = $parse(attrs.rate)(scope);
                 var orderType = $parse(attrs.orderType)(scope);
@@ -36,27 +37,15 @@
                 if (orderType != 'Market' && rate) {
 
                     var entryValues = validationHelperService.calcEntryPrice(action, orderType, rate);
+                    scope._maxEntryPrice = entryValues.max;
+                    scope._minEntryPrice = entryValues.min;
 
-                    ctrl.$setViewValue(entryValues.default);
-                    elem.attr('max', entryValues.max);
-                    elem.attr('min', entryValues.min);
-                    ctrl.$render();
-
-                    compile = true;
+                    scope.$applyAsync(function() {
+                        ctrl.$setViewValue(entryValues.default.toString());
+                        ctrl.$render();
+                    });
                 }
 
-                if (compile) {
-
-                    if (!elem.attr('compiled')) {
-
-                        elem.attr('compiled', true);
-                        $compile(elem)(scope);
-                    } else {
-                        $timeout(function () {
-                            elem.removeAttr('compiled');
-                        }, 0);
-                    }
-                }
 
             }
 

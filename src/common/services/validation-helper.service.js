@@ -26,9 +26,9 @@
 
             return {
                 price: {
-                    min: _min > _max ? _max : _min,
-                    max: _min > _max ? _min : _max,
-                    default: _default
+                    min: (_min > _max ? _max : _min).toString(),
+                    max: (_min > _max ? _min : _max).toString(),
+                    default: (_default).toString()
                 },
                 pips :{
                     min: restrictions.MANUAL_MINIMUM_PIPS_SL,
@@ -52,9 +52,9 @@
 
             return {
                 price: {
-                    min: _min > _max ? _max : _min,
-                    max: _min > _max ? _min : _max,
-                    default: _default
+                    min: (_min > _max ? _max : _min).toString(),
+                    max: (_min > _max ? _min : _max).toString(),
+                    default: (_default).toString()
                 },
                 pips :{
                     min: restrictions.MANUAL_MINIMUM_PIPS_TP,

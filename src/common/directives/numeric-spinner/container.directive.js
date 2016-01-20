@@ -9,15 +9,10 @@
 
         return {
             link: {
-                pre: pre,
                 post: link
             },
             controller: controller
         };
-
-        function pre(scope, elem, attrs, ctrl) {
-            scope.component = attrs.component;
-        }
 
         function link(scope, elem, attrs, ctrl) {
 
@@ -42,8 +37,11 @@
 
             function reassign() {
 
-                var data = ctrl.init();
-                ctrl.publish(data);
+                $timeout(function() {
+                    var data = ctrl.init();
+                    ctrl.publish(data);
+                }, 100);
+
             }
         }
 
@@ -69,15 +67,16 @@
 
             this.init = function () {
 
+                var component = $attrs.component;
                 var action = $parse($attrs.action)($scope);
                 var rate = $parse($attrs.rate)($scope);
                 var orderType = $parse($attrs.orderType)($scope);
                 var entryPrice = $parse($attrs.entryPriceModel)($scope);
                 var baseRate = orderType != 'Market' ? entryPrice : (action == 'Sell' ? rate.Bid : rate.Ask);
 
-                if ($scope.component == 'stoploss') {
+                if (component == 'stoploss') {
                     return validationHelperService.calcStopLoss(action, orderType, rate, baseRate);
-                } else if ($scope.component == 'takeprofit') {
+                } else if (component == 'takeprofit') {
                     return validationHelperService.calcTakeProfit(action, orderType, rate, baseRate);
                 }
 
@@ -85,11 +84,11 @@
 
             this.priceChanged = function (newRate, excludedCtrl) {
 
+                var component = $attrs.component;
                 var rate = $parse($attrs.rate)($scope);
                 var action = $parse($attrs.action)($scope);
                 var orderType = $parse($attrs.orderType)($scope);
                 var entryPrice = $parse($attrs.entryPriceModel)($scope);
-                var component = $parse($attrs.component)($scope);
                 var baseRate = orderType != 'Market' ? entryPrice : (action == 'Sell' ? rate.Bid : rate.Ask);
                 var isPlusOperation = action == 'Sell' && component == 'stoploss';
 

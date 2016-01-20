@@ -15,7 +15,7 @@
             controller: 'RatesController',
             controllerAs: 'Rates'
         }).state('order', {
-            url: '/order/{InstrumentID}/{type}',
+            url: '/order/{InstrumentID}/{type}/{isEdit}',
             templateUrl: 'states/app/trading/rates/order/order.html',
             controller: 'OrderController',
             controllerAs: 'order'
