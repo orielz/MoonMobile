@@ -126,7 +126,7 @@
                                     <label for="stopLossPriceCheck" class="middle">Price</label>
                                 </div>
                                 <div class="small-5 columns">
-                                    <input type="number" name="stopLoss" ng-model="order.model.StopLoss" numeric-price ng-min="{{min}}" ng-max="{{max}}" xng-disabled="order.stopLossOption != 'price'" step="{{order.rate.onePipValue}}">
+                                    <input type="number" name="stopLoss" ng-model="order.model.StopLoss" numeric-price ng-min="{{min}}" ng-max="{{max}}" ng-disabled="order.stopLossOption != 'price'" step="{{order.rate.onePipValue}}">
                                 </div>
                             </div>
                             <div class="row">

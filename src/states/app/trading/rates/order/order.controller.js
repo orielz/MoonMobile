@@ -86,11 +86,11 @@
         };
 
         function executeSuccess(response) {
-            console.log(arguments);
+
         }
 
         function executeFailed(response) {
-            console.log(arguments);
+
         }
 
         vm.cancel = function (form) {
