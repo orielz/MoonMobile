@@ -43,8 +43,8 @@
                         <div class="columns small-9">
                             <input type="number" id="amount" ng-model="order.model.Lots" name="amount"
                                    step="{{order.restrictions.AMOUNT_JUMPS}}"
-                                   validation-min="{{order.restrictions.MINIMUM_AMOUNT}}"
-                                   validation-max="{{order.restrictions.MAXIMUM_AMOUNT}}"
+                                   ng-min="{{order.restrictions.MINIMUM_AMOUNT}}"
+                                   ng-max="{{order.restrictions.MAXIMUM_AMOUNT}}"
                                    ng-init="order.model.Lots = order.restrictions.DEFAULT_AMOUNT">
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                         </div>
                         <div class="columns small-7">
                             <input type="number" name="entryPrice" id="entryPrice" ng-model="order.model.EntryPrice" data-action="order.action" data-order-type="order.orderType"
-                                   data-rate="order.rate" data-restrictions="order.restrictions" validation-min="{{_minEntryPrice}}" validation-max="{{_maxEntryPrice}}" entry-price step="any" />
+                                   data-rate="order.rate" data-restrictions="order.restrictions" ng-min="{{min}}" ng-max="{{max}}" entry-price step="any" />
                         </div>
                     </div>
                 </div>
@@ -126,7 +126,7 @@
                                     <label for="stopLossPriceCheck" class="middle">Price</label>
                                 </div>
                                 <div class="small-5 columns">
-                                    <input type="number" name="stopLoss" ng-model="order.model.StopLoss" numeric-price validation-min="{{min}}" validation-max="{{max}}" xng-disabled="order.stopLossOption != 'price'" step="{{order.rate.onePipValue}}">
+                                    <input type="number" name="stopLoss" ng-model="order.model.StopLoss" numeric-price ng-min="{{min}}" ng-max="{{max}}" xng-disabled="order.stopLossOption != 'price'" step="{{order.rate.onePipValue}}">
                                 </div>
                             </div>
                             <div class="row">
@@ -136,7 +136,7 @@
                                     <label for="pipsInDistanceCheck" class="middle">Distance in Pips</label>
                                 </div>
                                 <div class="small-5 columns">
-                                    <input type="number" name="stopLossPips" ng-model="order.stopLossDistanceInPips" numeric-spinner validation-min="{{min}}" validation-max="{{max}}" xng-disabled="order.stopLossOption != 'pipsDistance'">
+                                    <input type="number" name="stopLossPips" ng-model="order.stopLossDistanceInPips" numeric-spinner ng-min="{{min}}" ng-max="{{max}}" xng-disabled="order.stopLossOption != 'pipsDistance'">
                                 </div>
                             </div>
                         </div>
@@ -177,7 +177,7 @@
                                     <label for="takeProfitPriceCheck" class="middle">Price</label>
                                 </div>
                                 <div class="small-5 columns">
-                                    <input type="number" name="takeProfitPrice" ng-model="order.model.TakeProfit" numeric-price validation-min="{{min}}" validation-max="{{max}}" ng-disabled="order.takeProfitOption != 'price'" step="{{order.rate.onePipValue}}">
+                                    <input type="number" name="takeProfitPrice" ng-model="order.model.TakeProfit" numeric-price ng-min="{{min}}" ng-max="{{max}}" ng-disabled="order.takeProfitOption != 'price'" step="{{order.rate.onePipValue}}">
                                 </div>
                             </div>
                             <div class="row">
@@ -187,7 +187,7 @@
                                     <label for="takeProfitPipsInDistanceCheck" class="middle">Distance in Pips</label>
                                 </div>
                                 <div class="small-5 columns">
-                                    <input type="number" name="takeProfitPips" ng-model="order.takeProfitDistanceInPips" numeric-spinner validation-min="{{min}}" validation-max="{{max}}" ng-disabled="order.takeProfitOption != 'pipsDistance'">
+                                    <input type="number" name="takeProfitPips" ng-model="order.takeProfitDistanceInPips" numeric-spinner ng-min="{{min}}" ng-max="{{max}}" ng-disabled="order.takeProfitOption != 'pipsDistance'">
                                 </div>
                             </div>
                         </div>

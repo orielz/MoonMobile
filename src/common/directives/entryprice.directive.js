@@ -10,7 +10,7 @@
         return {
             require: 'ngModel',
             scope: true,
-            priority: 1,
+            priority: 1, // Higher priority than the other directives cause the other depends on this directive
             link: link
         };
 
@@ -37,16 +37,14 @@
                 if (orderType != 'Market' && rate) {
 
                     var entryValues = validationHelperService.calcEntryPrice(action, orderType, rate);
-                    scope._maxEntryPrice = entryValues.max;
-                    scope._minEntryPrice = entryValues.min;
+                    scope.max = entryValues.max;
+                    scope.min = entryValues.min;
 
                     scope.$applyAsync(function() {
                         ctrl.$setViewValue(entryValues.default.toString());
                         ctrl.$render();
                     });
                 }
-
-
             }
 
         }
