@@ -18,7 +18,8 @@
             updateNewPasswordUrl: 'http://mws.tradency.com/UserManager/updateNewPassword',
             getMobileBrokersListUrl: 'http://mws.tradency.com/MobileDeviceController/GetMobileBrokersList',
             getGroupAttributesUrl: 'http://mws.tradency.com/GroupAttributes/GetGroupAttributes',
-            getTranslationsUrl: 'http://mws.tradency.com/GroupTranslations/GetTranslations'
+            getTranslationsUrl: 'http://mws.tradency.com/GroupTranslations/GetTranslations',
+            openUserMarketOrderUrl: 'http://mws.tradency.com/Signals/OpenUserMarketOrder'
         },
         accountTypes: {
             1: '_MICRO',

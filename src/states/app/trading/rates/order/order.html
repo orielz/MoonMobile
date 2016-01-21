@@ -6,7 +6,7 @@
         </div>
     </div>
 
-    <form novalidate>
+    <form name="form" novalidate ng-submit="order.execute(form)">
 
         <div class="row">
             <div class="small-12 columns padding-top">
@@ -21,11 +21,11 @@
                 <div class="white-container padding-left padding-top-half padding-right">
                     <div class="row">
                         <div class="small-12 columns">
-                            <input type="radio" name="BuyOrSell" value="Sell" id="sell" ng-model="order.model.action">
+                            <input type="radio" name="BuyOrSell" value="Sell" id="sell" ng-model="order.action" ng-change="order.actionChanged(order.action)">
                             <label for="sell">Sell</label>
                         </div>
                         <div class="small-12 columns">
-                            <input type="radio" name="BuyOrSell" value="Buy" id="buy" ng-model="order.model.action">
+                            <input type="radio" name="BuyOrSell" value="Buy" id="buy" ng-model="order.action" ng-change="order.actionChanged(order.action)">
                             <label for="buy">Buy</label>
                         </div>
                     </div>
@@ -41,11 +41,14 @@
                             <label for="amount" class="middle title">Amount</label>
                         </div>
                         <div class="columns small-9">
-                            <input type="number" id="amount" ng-model="order.model.amount"
+                            <input type="number" id="amount" ng-model="order.model.Lots" name="amount"
                                    step="{{order.restrictions.AMOUNT_JUMPS}}"
-                                   min="{{order.restrictions.MINIMUM_AMOUNT}}"
-                                   max="{{order.restrictions.MAXIMUM_AMOUNT}}"
-                                   ng-init="order.model.amount = order.restrictions.DEFAULT_AMOUNT">
+                                   ng-min="{{order.restrictions.MINIMUM_AMOUNT}}"
+                                   ng-max="{{order.restrictions.MAXIMUM_AMOUNT}}"
+                                   ng-init="order.model.Lots = order.restrictions.DEFAULT_AMOUNT">
+                            <div class="error" ng-show="form.amount.$error.min">Minimum is {{order.restrictions.MINIMUM_AMOUNT}}</div>
+                            <div class="error" ng-show="form.amount.$error.max">Maximum is {{order.restrictions.MAXIMUM_AMOUNT}}</div>
+                            <div class="error" ng-show="form.amount.$error.required">Required field</div>
                         </div>
                     </div>
                 </div>
@@ -60,15 +63,15 @@
                             <legend class="title">Order Type</legend>
                             <div class="row">
                                 <div class="small-12 columns">
-                                    <input type="radio" name="orderType" value="Market" id="market" ng-model="order.model.orderType" ng-change="order.orderTypeChanged(order.model.orderType)" ng-init="order.model.orderType = 'Market'">
+                                    <input type="radio" name="orderType" value="Market" id="market" ng-model="order.orderType" ng-change="order.orderTypeChanged(order.orderType)" ng-init="order.orderType = 'Market'">
                                     <label for="market">Market</label>
                                 </div>
                                 <div class="small-12 columns">
-                                    <input type="radio" name="orderType" value="Stop"  id="stop" ng-model="order.model.orderType" ng-change="order.orderTypeChanged(order.model.orderType)">
+                                    <input type="radio" name="orderType" value="Stop"  id="stop" ng-model="order.orderType" ng-change="order.orderTypeChanged(order.orderType)">
                                     <label for="stop">Stop</label>
                                 </div>
                                 <div class="small-12 columns">
-                                    <input type="radio" name="orderType" value="Limit"  id="limit" ng-model="order.model.orderType" ng-change="order.orderTypeChanged(order.model.orderType)">
+                                    <input type="radio" name="orderType" value="Limit" id="limit" ng-model="order.orderType" ng-change="order.orderTypeChanged(order.orderType)">
                                     <label for="limit">Limit</label>
                                 </div>
                             </div>
@@ -78,7 +81,7 @@
             </div>
         </div>
 
-        <div class="row" ng-show="order.model.orderType === 'Stop' || order.model.orderType === 'Limit'">
+        <div class="row" ng-show="order.orderType === 'Stop' || order.orderType === 'Limit'">
             <div class="small-12 columns padding-top">
                 <div class="white-container padding-left padding-top padding-right">
                     <div class="row">
@@ -86,8 +89,14 @@
                             <label for="entryPrice" class="middle title">Entry Price</label>
                         </div>
                         <div class="columns small-7">
-                            <input type="number" id="entryPrice" ng-model="order.model.entryPrice" data-action="order.model.action" data-order-type="order.model.orderType"
-                                   data-rate="order.rate" data-restrictions="order.restrictions" entry-price />
+                            <input type="number" name="entryPrice" id="entryPrice" ng-model="order.model.EntryPrice" data-action="order.action" data-order-type="order.orderType"
+                                   data-rate="order.rate" data-restrictions="order.restrictions" ng-min="{{min}}" ng-max="{{max}}" entry-price step="{{order.rate.onePipValue}}"
+                                   ng-required="order.orderType === 'Stop' || order.orderType === 'Limit'" />
+                            <div ng-messages="form.entryPrice.$error">
+                                <div class="error" ng-message="ngMin">Minimum is {{form.entryPrice.minValue}}</div>
+                                <div class="error" ng-message="ngMax">Maximum is {{form.entryPrice.maxValue}}</div>
+                                <div class="error" ng-message="required">Required field</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -106,7 +115,7 @@
                         <div class="small-4 columns">
                             <div class="switch small radius padding-bottom-half padding-right-quarter pull-right">
                                 <input class="switch-input" id="stopLossSwitch" type="checkbox" name="stopLossSwitch"
-                                       ng-model="order.showStopLoss" ng-change="order.stopLossChanged()">
+                                       ng-model="order.showStopLoss" ng-change="order.stopLossChanged(order.showStopLoss)">
                                 <label class="switch-paddle" for="stopLossSwitch">
                                     <span class="switch-active" aria-hidden="true"></span>
                                     <span class="switch-inactive" aria-hidden="true"></span>
@@ -115,29 +124,38 @@
                         </div>
                     </div>
                     <div class="row expandable-animation" ng-show="order.showStopLoss" spinner-container
-                         data-action="order.model.action" data-order-type="order.model.orderType" data-component="stoploss"
-                         data-rate="order.rate" data-restrictions="order.restrictions" entry-price-model="order.model.entryPrice">
+                         data-action="orde.action" data-order-type="order.orderType" data-component="stoploss"
+                         data-rate="order.rate" data-restrictions="order.restrictions" entry-price-model="order.model.EntryPrice">
 
                         <div class="columns small-12">
                             <div class="row padding-top">
                                 <div class="small-7 columns">
                                     <input type="radio" name="stopLoss" value="price" id="stopLossPriceCheck"
-                                           ng-model="order.model.stopLossOption">
+                                           ng-model="order.stopLossOption">
                                     <label for="stopLossPriceCheck" class="middle">Price</label>
                                 </div>
                                 <div class="small-5 columns">
-                                    <input type="number" ng-model="order.model.stopLossPrice" numeric-price ng-disabled="order.model.stopLossOption != 'price'" step="{{order.rate.onePipValue}}">
+                                    <input type="number" name="stopLoss" ng-model="order.model.StopLoss" numeric-price ng-min="{{order.showStopLoss ? min : 0}}" ng-max="{{order.showStopLoss ? max : Infinity}}" ng-disabled="order.stopLossOption != 'price'" step="{{order.rate.onePipValue}}" ng-required="order.showStopLoss">
+                                    <div ng-messages="form.stopLoss.$error">
+                                        <div class="error" ng-message="ngMin">Minimum is {{form.stopLoss.minValue}}</div>
+                                        <div class="error" ng-message="ngMax">Maximum is {{form.stopLoss.maxValue}}</div>
+                                        <div class="error" ng-message="required">Required field</div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="small-7 columns">
-                                    <input type="radio" name="stopLoss" value="pipsDistance" id="pipsInDistanceCheck"
-                                           ng-model="order.model.stopLossOption">
+                                    <input type="radio" name="stopLossPrice" value="pipsDistance" id="pipsInDistanceCheck"
+                                           ng-model="order.stopLossOption">
                                     <label for="pipsInDistanceCheck" class="middle">Distance in Pips</label>
                                 </div>
                                 <div class="small-5 columns">
-                                    <input type="number" ng-model="order.model.stopLossDistanceInPips" numeric-spinner
-                                           ng-disabled="order.model.stopLossOption != 'pipsDistance'">
+                                    <input type="number" name="stopLossPips" ng-model="order.stopLossDistanceInPips" numeric-spinner ng-min="{{order.showStopLoss ? min : 0}}" ng-max="{{order.showStopLoss ? max : Infinity}}" ng-disabled="order.stopLossOption != 'pipsDistance'"  ng-required="order.showStopLoss">
+                                    <div ng-messages="form.stopLossPips.$error">
+                                        <div class="error" ng-message="ngMin">Minimum is {{form.stopLossPips.minValue}}</div>
+                                        <div class="error" ng-message="ngMax">Maximum is {{form.stopLossPips.maxValue}}</div>
+                                        <div class="error" ng-message="required">Required field</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -159,7 +177,7 @@
                             <div class="switch small radius padding-bottom-half padding-right-quarter pull-right">
                                 <input class="switch-input" id="takeProfitSwitch" type="checkbox"
                                        name="takeProfitSwitch"
-                                       ng-model="order.showTakeProfit" ng-change="order.takeProfitChanged()">
+                                       ng-model="order.showTakeProfit" ng-change="order.takeProfitChanged(order.showTakeProfit)">
                                 <label class="switch-paddle" for="takeProfitSwitch">
                                     <span class="switch-active" aria-hidden="true"></span>
                                     <span class="switch-inactive" aria-hidden="true"></span>
@@ -168,27 +186,37 @@
                         </div>
                     </div>
                     <div class="row expandable-animation" ng-show="order.showTakeProfit" spinner-container
-                         data-action="order.model.action" data-order-type="order.model.orderType" data-component="takeprofit"
-                         data-rate="order.rate" data-restrictions="order.restrictions" entry-price-model="order.model.entryPrice">
+                         data-action="order.action" data-order-type="order.orderType" data-component="takeprofit"
+                         data-rate="order.rate" data-restrictions="order.restrictions" entry-price-model="order.model.EntryPrice">
                         <div class="columns small-12">
                             <div class="row padding-top">
                                 <div class="small-7 columns">
                                     <input type="radio" name="takeProfit" value="price" id="takeProfitPriceCheck"
-                                           ng-model="order.model.takeProfitOption">
+                                           ng-model="order.takeProfitOption">
                                     <label for="takeProfitPriceCheck" class="middle">Price</label>
                                 </div>
                                 <div class="small-5 columns">
-                                    <input type="number" ng-model="order.model.takeProfitPrice" numeric-price ng-disabled="order.model.takeProfitOption != 'price'" step="{{order.rate.onePipValue}}">
+                                    <input type="number" name="takeProfitPrice" ng-model="order.model.TakeProfit" numeric-price ng-min="{{order.showTakeProfit ? min : 0}}" ng-max="{{order.showTakeProfit ? max : Infinity}}" ng-disabled="order.takeProfitOption != 'price'" step="{{order.rate.onePipValue}}"  ng-required="order.showTakeProfit">
+                                    <div ng-messages="form.takeProfitPrice.$error">
+                                        <div class="error" ng-message="ngMin">Minimum is {{form.takeProfitPrice.minValue}}</div>
+                                        <div class="error" ng-message="ngMax">Maximum is {{form.takeProfitPrice.maxValue}}</div>
+                                        <div class="error" ng-message="required">Required field</div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="small-7 columns">
                                     <input type="radio" name="takeProfit" value="pipsDistance"
-                                           id="takeProfitPipsInDistanceCheck" ng-model="order.model.takeProfitOption">
+                                           id="takeProfitPipsInDistanceCheck" ng-model="order.takeProfitOption">
                                     <label for="takeProfitPipsInDistanceCheck" class="middle">Distance in Pips</label>
                                 </div>
                                 <div class="small-5 columns">
-                                    <input type="number" ng-model="order.model.takeProfitDistanceInPips" numeric-spinner ng-disabled="order.model.takeProfitOption != 'pipsDistance'">
+                                    <input type="number" name="takeProfitPips" ng-model="order.takeProfitDistanceInPips" numeric-spinner ng-min="{{order.showTakeProfit ? min : 0}}" ng-max="{{order.showTakeProfit ? max : Infinity}}" ng-disabled="order.takeProfitOption != 'pipsDistance'" ng-required="order.showTakeProfit">
+                                    <div ng-messages="form.takeProfitPips.$error">
+                                        <div class="error" ng-message="ngMin">Minimum is {{form.takeProfitPips.minValue}}</div>
+                                        <div class="error" ng-message="ngMax">Maximum is {{form.takeProfitPips.maxValue}}</div>
+                                        <div class="error" ng-message="required">Required field</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -197,7 +225,7 @@
             </div>
         </div>
 
-        <!--<div class="row" ng-show="order.model.orderType === 'Stop' || order.model.orderType === 'Limit'">-->
+        <!--<div class="row" ng-show="order.orderType === 'Stop' || order.orderType === 'Limit'">-->
             <!--<div class="small-12 columns padding-top">-->
                 <!--<div class="white-container padding-left padding-top padding-right">-->
 
@@ -265,10 +293,10 @@
 
         <div class="row">
             <div class="small-5 columns padding-top">
-                <button class="trd-button button expanded" href="#">Cancel</button>
+                <button class="trd-button button expanded" href="#" ng-click="order.cancel(form)">Cancel</button>
             </div>
             <div class="small-7 columns padding-top padding-left-quarter">
-                <button class="trd-button button expanded" href="#">Execute</button>
+                <button class="trd-button button expanded" href="#" type="submit" ng-click="submitted=true">Execute</button>
             </div>
         </div>
 

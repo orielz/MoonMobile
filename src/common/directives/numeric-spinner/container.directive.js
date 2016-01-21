@@ -9,40 +9,25 @@
 
         return {
             link: {
-                pre: pre,
                 post: link
             },
             controller: controller
         };
 
-        function pre(scope, elem, attrs, ctrl) {
-            scope.component = attrs.component;
-        }
-
         function link(scope, elem, attrs, ctrl) {
 
-            // Listen to changes and re assign validation and default values on change
-            scope.$watch(attrs.rate, function (newVal, oldVal) {
-                if (newVal && newVal != oldVal) {
-                    reassign();
-                }
-            });
+            if (attrs.component == 'stoploss')
+            {
+                scope.$on('onStopLossToggle', onToggle);
+            }
 
-            scope.$watch(attrs.action, function (newVal, oldVal) {
-                if (newVal && newVal != oldVal) {
-                    reassign();
-                }
-            });
+            if (attrs.component == 'takeprofit')
+            {
+                scope.$on('onTakeProfitToggle', onToggle);
+            }
 
-            scope.$watch(attrs.orderType, function (newVal, oldVal) {
-                if (newVal && newVal != oldVal) {
-                    reassign();
-                }
-            });
-
-            function reassign() {
-
-                var data = ctrl.init();
+            function onToggle() {
+                var data = ctrl.calc(attrs.component);
                 ctrl.publish(data);
             }
         }
@@ -60,14 +45,14 @@
                 angular.forEach(registered, function (controller) {
 
                     if (excludedCtrl && controller != excludedCtrl) {
-                        controller.set(data);
+                        new controller.set(data);
                     } else if (!excludedCtrl) {
-                        controller.set(data);
+                        new controller.set(data);
                     }
                 });
             };
 
-            this.init = function () {
+            this.calc = function (component) {
 
                 var action = $parse($attrs.action)($scope);
                 var rate = $parse($attrs.rate)($scope);
@@ -75,9 +60,9 @@
                 var entryPrice = $parse($attrs.entryPriceModel)($scope);
                 var baseRate = orderType != 'Market' ? entryPrice : (action == 'Sell' ? rate.Bid : rate.Ask);
 
-                if ($scope.component == 'stoploss') {
+                if (component == 'stoploss') {
                     return validationHelperService.calcStopLoss(action, orderType, rate, baseRate);
-                } else if ($scope.component == 'takeprofit') {
+                } else if (component == 'takeprofit') {
                     return validationHelperService.calcTakeProfit(action, orderType, rate, baseRate);
                 }
 
@@ -85,11 +70,11 @@
 
             this.priceChanged = function (newRate, excludedCtrl) {
 
+                var component = $attrs.component;
                 var rate = $parse($attrs.rate)($scope);
                 var action = $parse($attrs.action)($scope);
                 var orderType = $parse($attrs.orderType)($scope);
                 var entryPrice = $parse($attrs.entryPriceModel)($scope);
-                var component = $parse($attrs.component)($scope);
                 var baseRate = orderType != 'Market' ? entryPrice : (action == 'Sell' ? rate.Bid : rate.Ask);
                 var isPlusOperation = action == 'Sell' && component == 'stoploss';
 

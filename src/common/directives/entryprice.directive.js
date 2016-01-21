@@ -3,32 +3,33 @@
  */
 (function (app) {
 
-    app.directive('entryPrice', ['$timeout', '$parse', 'validationHelperService', '$compile','$compile', entryPrice]);
+    app.directive('entryPrice', ['$timeout', '$parse', 'validationHelperService', '$compile', '$compile', entryPrice]);
 
     function entryPrice($timeout, $parse, validationHelperService, $compile) {
 
         return {
             require: 'ngModel',
+            scope: true,
+            priority: 1, // Higher priority than the other directives cause the other depends on this directive
             link: link
         };
 
         function link(scope, elem, attrs, ctrl) {
 
             scope.$watch(attrs.rate, function (rate) {
-                recompile();
+                onCalcEntryPrice();
             });
 
             scope.$watch(attrs.action, function (action) {
-                recompile();
+                onCalcEntryPrice();
             });
 
             scope.$watch(attrs.orderType, function (orderType) {
-                recompile();
+                onCalcEntryPrice();
             });
 
-            function recompile() {
+            function onCalcEntryPrice() {
 
-                var compile = false;
                 var action = $parse(attrs.action)(scope);
                 var rate = $parse(attrs.rate)(scope);
                 var orderType = $parse(attrs.orderType)(scope);
@@ -36,28 +37,17 @@
                 if (orderType != 'Market' && rate) {
 
                     var entryValues = validationHelperService.calcEntryPrice(action, orderType, rate);
+                    scope.max = entryValues.max;
+                    scope.min = entryValues.min;
+                    scope.form.entryPrice.minValue = entryValues.min;
+                    scope.form.entryPrice.maxValue = entryValues.max;
 
-                    ctrl.$setViewValue(entryValues.default);
-                    elem.attr('max', entryValues.max);
-                    elem.attr('min', entryValues.min);
-                    ctrl.$render();
+                    scope.$applyAsync(function () {
+                        ctrl.$setViewValue(entryValues.default.toString());
+                        ctrl.$render();
+                    });
 
-                    compile = true;
                 }
-
-                if (compile) {
-
-                    if (!elem.attr('compiled')) {
-
-                        elem.attr('compiled', true);
-                        $compile(elem)(scope);
-                    } else {
-                        $timeout(function () {
-                            elem.removeAttr('compiled');
-                        }, 0);
-                    }
-                }
-
             }
 
         }
