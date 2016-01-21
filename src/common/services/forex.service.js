@@ -113,7 +113,7 @@
             var JAVASCRIPT_FLOATING_POINT = 17;
             var decimal = baseRate.toString().split('.')[1];
 
-            if (decimal.length + allowedPrecision >= JAVASCRIPT_FLOATING_POINT) {
+            if (decimal && decimal.length + allowedPrecision >= JAVASCRIPT_FLOATING_POINT) {
                 baseRate = baseRate.toFixed(allowedPrecision);
                 baseRate = parseFloat(baseRate);
             }
@@ -127,7 +127,7 @@
          */
         function fixRate(rate, allowedPrecision) {
 
-            var decimalLength = rate.split('.')[1].length || 0;
+            var decimalLength = rate.split('.')[1] ? rate.split('.')[1].length : 0;
 
             if (decimalLength < allowedPrecision) {
 

@@ -16,32 +16,19 @@
 
         function link(scope, elem, attrs, ctrl) {
 
-            // Listen to changes and re assign validation and default values on change
-            scope.$watch(attrs.rate, function (newVal, oldVal) {
-                if (newVal && newVal != oldVal) {
-                    reassign();
-                }
-            });
+            if (attrs.component == 'stoploss')
+            {
+                scope.$on('onStopLossToggle', onToggle);
+            }
 
-            scope.$watch(attrs.action, function (newVal, oldVal) {
-                if (newVal && newVal != oldVal) {
-                    reassign();
-                }
-            });
+            if (attrs.component == 'takeprofit')
+            {
+                scope.$on('onTakeProfitToggle', onToggle);
+            }
 
-            scope.$watch(attrs.orderType, function (newVal, oldVal) {
-                if (newVal && newVal != oldVal) {
-                    reassign();
-                }
-            });
-
-            function reassign() {
-
-                $timeout(function() {
-                    var data = ctrl.init();
-                    ctrl.publish(data);
-                }, 100);
-
+            function onToggle() {
+                var data = ctrl.calc(attrs.component);
+                ctrl.publish(data);
             }
         }
 
@@ -58,16 +45,15 @@
                 angular.forEach(registered, function (controller) {
 
                     if (excludedCtrl && controller != excludedCtrl) {
-                        controller.set(data);
+                        new controller.set(data);
                     } else if (!excludedCtrl) {
-                        controller.set(data);
+                        new controller.set(data);
                     }
                 });
             };
 
-            this.init = function () {
+            this.calc = function (component) {
 
-                var component = $attrs.component;
                 var action = $parse($attrs.action)($scope);
                 var rate = $parse($attrs.rate)($scope);
                 var orderType = $parse($attrs.orderType)($scope);

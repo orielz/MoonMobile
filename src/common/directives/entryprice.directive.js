@@ -17,18 +17,18 @@
         function link(scope, elem, attrs, ctrl) {
 
             scope.$watch(attrs.rate, function (rate) {
-                recompile();
+                onCalcEntryPrice();
             });
 
             scope.$watch(attrs.action, function (action) {
-                recompile();
+                onCalcEntryPrice();
             });
 
             scope.$watch(attrs.orderType, function (orderType) {
-                recompile();
+                onCalcEntryPrice();
             });
 
-            function recompile() {
+            function onCalcEntryPrice() {
 
                 var action = $parse(attrs.action)(scope);
                 var rate = $parse(attrs.rate)(scope);
@@ -39,11 +39,14 @@
                     var entryValues = validationHelperService.calcEntryPrice(action, orderType, rate);
                     scope.max = entryValues.max;
                     scope.min = entryValues.min;
+                    scope.form.entryPrice.minValue = entryValues.min;
+                    scope.form.entryPrice.maxValue = entryValues.max;
 
-                    scope.$applyAsync(function() {
+                    scope.$applyAsync(function () {
                         ctrl.$setViewValue(entryValues.default.toString());
                         ctrl.$render();
                     });
+
                 }
             }
 

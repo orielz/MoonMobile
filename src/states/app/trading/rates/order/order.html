@@ -46,6 +46,9 @@
                                    ng-min="{{order.restrictions.MINIMUM_AMOUNT}}"
                                    ng-max="{{order.restrictions.MAXIMUM_AMOUNT}}"
                                    ng-init="order.model.Lots = order.restrictions.DEFAULT_AMOUNT">
+                            <div class="error" ng-show="form.amount.$error.min">Minimum is {{order.restrictions.MINIMUM_AMOUNT}}</div>
+                            <div class="error" ng-show="form.amount.$error.max">Maximum is {{order.restrictions.MAXIMUM_AMOUNT}}</div>
+                            <div class="error" ng-show="form.amount.$error.required">Required field</div>
                         </div>
                     </div>
                 </div>
@@ -87,7 +90,13 @@
                         </div>
                         <div class="columns small-7">
                             <input type="number" name="entryPrice" id="entryPrice" ng-model="order.model.EntryPrice" data-action="order.action" data-order-type="order.orderType"
-                                   data-rate="order.rate" data-restrictions="order.restrictions" ng-min="{{min}}" ng-max="{{max}}" entry-price step="any" />
+                                   data-rate="order.rate" data-restrictions="order.restrictions" ng-min="{{min}}" ng-max="{{max}}" entry-price step="{{order.rate.onePipValue}}"
+                                   ng-required="order.orderType === 'Stop' || order.orderType === 'Limit'" />
+                            <div ng-messages="form.entryPrice.$error">
+                                <div class="error" ng-message="ngMin">Minimum is {{form.entryPrice.minValue}}</div>
+                                <div class="error" ng-message="ngMax">Maximum is {{form.entryPrice.maxValue}}</div>
+                                <div class="error" ng-message="required">Required field</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -106,7 +115,7 @@
                         <div class="small-4 columns">
                             <div class="switch small radius padding-bottom-half padding-right-quarter pull-right">
                                 <input class="switch-input" id="stopLossSwitch" type="checkbox" name="stopLossSwitch"
-                                       ng-model="order.showStopLoss" ng-change="order.stopLossChanged()">
+                                       ng-model="order.showStopLoss" ng-change="order.stopLossChanged(order.showStopLoss)">
                                 <label class="switch-paddle" for="stopLossSwitch">
                                     <span class="switch-active" aria-hidden="true"></span>
                                     <span class="switch-inactive" aria-hidden="true"></span>
@@ -126,7 +135,12 @@
                                     <label for="stopLossPriceCheck" class="middle">Price</label>
                                 </div>
                                 <div class="small-5 columns">
-                                    <input type="number" name="stopLoss" ng-model="order.model.StopLoss" numeric-price ng-min="{{min}}" ng-max="{{max}}" ng-disabled="order.stopLossOption != 'price'" step="{{order.rate.onePipValue}}">
+                                    <input type="number" name="stopLoss" ng-model="order.model.StopLoss" numeric-price ng-min="{{order.showStopLoss ? min : 0}}" ng-max="{{order.showStopLoss ? max : Infinity}}" ng-disabled="order.stopLossOption != 'price'" step="{{order.rate.onePipValue}}" ng-required="order.showStopLoss">
+                                    <div ng-messages="form.stopLoss.$error">
+                                        <div class="error" ng-message="ngMin">Minimum is {{form.stopLoss.minValue}}</div>
+                                        <div class="error" ng-message="ngMax">Maximum is {{form.stopLoss.maxValue}}</div>
+                                        <div class="error" ng-message="required">Required field</div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -136,7 +150,12 @@
                                     <label for="pipsInDistanceCheck" class="middle">Distance in Pips</label>
                                 </div>
                                 <div class="small-5 columns">
-                                    <input type="number" name="stopLossPips" ng-model="order.stopLossDistanceInPips" numeric-spinner ng-min="{{min}}" ng-max="{{max}}" ng-disabled="order.stopLossOption != 'pipsDistance'">
+                                    <input type="number" name="stopLossPips" ng-model="order.stopLossDistanceInPips" numeric-spinner ng-min="{{order.showStopLoss ? min : 0}}" ng-max="{{order.showStopLoss ? max : Infinity}}" ng-disabled="order.stopLossOption != 'pipsDistance'"  ng-required="order.showStopLoss">
+                                    <div ng-messages="form.stopLossPips.$error">
+                                        <div class="error" ng-message="ngMin">Minimum is {{form.stopLossPips.minValue}}</div>
+                                        <div class="error" ng-message="ngMax">Maximum is {{form.stopLossPips.maxValue}}</div>
+                                        <div class="error" ng-message="required">Required field</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -158,7 +177,7 @@
                             <div class="switch small radius padding-bottom-half padding-right-quarter pull-right">
                                 <input class="switch-input" id="takeProfitSwitch" type="checkbox"
                                        name="takeProfitSwitch"
-                                       ng-model="order.showTakeProfit" ng-change="order.takeProfitChanged()">
+                                       ng-model="order.showTakeProfit" ng-change="order.takeProfitChanged(order.showTakeProfit)">
                                 <label class="switch-paddle" for="takeProfitSwitch">
                                     <span class="switch-active" aria-hidden="true"></span>
                                     <span class="switch-inactive" aria-hidden="true"></span>
@@ -177,7 +196,12 @@
                                     <label for="takeProfitPriceCheck" class="middle">Price</label>
                                 </div>
                                 <div class="small-5 columns">
-                                    <input type="number" name="takeProfitPrice" ng-model="order.model.TakeProfit" numeric-price ng-min="{{min}}" ng-max="{{max}}" ng-disabled="order.takeProfitOption != 'price'" step="{{order.rate.onePipValue}}">
+                                    <input type="number" name="takeProfitPrice" ng-model="order.model.TakeProfit" numeric-price ng-min="{{order.showTakeProfit ? min : 0}}" ng-max="{{order.showTakeProfit ? max : Infinity}}" ng-disabled="order.takeProfitOption != 'price'" step="{{order.rate.onePipValue}}"  ng-required="order.showTakeProfit">
+                                    <div ng-messages="form.takeProfitPrice.$error">
+                                        <div class="error" ng-message="ngMin">Minimum is {{form.takeProfitPrice.minValue}}</div>
+                                        <div class="error" ng-message="ngMax">Maximum is {{form.takeProfitPrice.maxValue}}</div>
+                                        <div class="error" ng-message="required">Required field</div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -187,7 +211,12 @@
                                     <label for="takeProfitPipsInDistanceCheck" class="middle">Distance in Pips</label>
                                 </div>
                                 <div class="small-5 columns">
-                                    <input type="number" name="takeProfitPips" ng-model="order.takeProfitDistanceInPips" numeric-spinner ng-min="{{min}}" ng-max="{{max}}" ng-disabled="order.takeProfitOption != 'pipsDistance'">
+                                    <input type="number" name="takeProfitPips" ng-model="order.takeProfitDistanceInPips" numeric-spinner ng-min="{{order.showTakeProfit ? min : 0}}" ng-max="{{order.showTakeProfit ? max : Infinity}}" ng-disabled="order.takeProfitOption != 'pipsDistance'" ng-required="order.showTakeProfit">
+                                    <div ng-messages="form.takeProfitPips.$error">
+                                        <div class="error" ng-message="ngMin">Minimum is {{form.takeProfitPips.minValue}}</div>
+                                        <div class="error" ng-message="ngMax">Maximum is {{form.takeProfitPips.maxValue}}</div>
+                                        <div class="error" ng-message="required">Required field</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

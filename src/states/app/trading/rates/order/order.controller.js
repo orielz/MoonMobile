@@ -3,9 +3,9 @@
  */
 (function (app) {
 
-    app.controller('OrderController', ['ratesService', 'restrictionsService', '$stateParams', 'ratesModel', 'constants', 'orderService', '$localStorage', '$compile', '$rootScope', OrderController]);
+    app.controller('OrderController', ['ratesService', 'restrictionsService', '$stateParams', 'ratesModel', 'constants', 'orderService', '$localStorage', '$compile', '$scope', OrderController]);
 
-    function OrderController(ratesService, restrictionsService, $stateParams, ratesModel, constants, orderService, $localStorage, $compile, $rootScope) {
+    function OrderController(ratesService, restrictionsService, $stateParams, ratesModel, constants, orderService, $localStorage, $compile, $scope) {
 
         var vm = this;
 
@@ -31,22 +31,57 @@
         };
 
         vm.rateChanged = function (rate) {
+
             vm.model.InstrumentID = rate.InstrumentID;
+
+            if (vm.showStopLoss) {
+                $scope.$broadcast('onStopLossToggle');
+            }
+
+            if (vm.showTakeProfit) {
+                $scope.$broadcast('onTakeProfitToggle');
+            }
+
+
         };
 
-        vm.actionChanged = function(action) {
+        vm.actionChanged = function (action) {
 
             if (vm.orderType === 'Market') {
                 vm.model.EntryPrice = parseFloat(action == 'Sell' ? vm.rate.Bid : vm.rate.Ask)
             }
 
+            if (vm.showStopLoss) {
+                $scope.$broadcast('onStopLossToggle');
+            }
+
+            if (vm.showTakeProfit) {
+                $scope.$broadcast('onTakeProfitToggle');
+            }
+
         };
 
-        vm.stopLossChanged = function () {
+        vm.stopLossChanged = function (isOpen) {
+
+            var calcPrice = $scope.form.stopLoss.$invalid || !vm.model.StopLoss;
+            var calcPips = $scope.form.stopLossPips.$invalid || !vm.stopLossDistanceInPips;
+
+            if (calcPrice || calcPips) {
+                $scope.$broadcast('onStopLossToggle');
+            }
+
             vm.stopLossOption = 'pipsDistance';
         };
 
-        vm.takeProfitChanged = function () {
+        vm.takeProfitChanged = function (isOpen) {
+
+            var calcPrice = $scope.form.takeProfit.$invalid || !vm.model.TakeProfit;
+            var calcPips = $scope.form.takeProfitPrice.$invalid || !vm.takeProfitDistanceInPips;
+
+            if (calcPrice || calcPips) {
+                $scope.$broadcast('onTakeProfitToggle');
+            }
+
             vm.takeProfitOption = 'pipsDistance';
         };
 
@@ -55,8 +90,13 @@
         };
 
         vm.orderTypeChanged = function (orderType) {
-            if (orderType == 'Market') {
-                vm.showExpiration = false;
+
+            if (vm.showStopLoss) {
+                $scope.$broadcast('onStopLossToggle');
+            }
+
+            if (vm.showTakeProfit) {
+                $scope.$broadcast('onTakeProfitToggle');
             }
         };
 
@@ -96,7 +136,6 @@
         vm.cancel = function (form) {
             console.log(form.$valid);
         }
-
 
 
     }

@@ -15,16 +15,6 @@
 
         function link(scope, elem, attrs, controllers) {
 
-            var isInnerChange = false;
-
-            // This check performed in order to not $compile this directive twice
-            if (elem.attr('compiled')) {
-
-                elem.removeAttr('compiled');
-
-                return;
-            }
-
             var ctrl = controllers[0];
             var parentCtrl = controllers[1];
 
@@ -42,43 +32,29 @@
                 if (!data)
                     return;
 
-                if (data.max)
+                if (data.max) {
                     scope.max = data.max;
-                if (data.min)
+                    scope.form[ctrl.$name].maxValue = data.max;
+                }
+
+                if (data.min) {
                     scope.min = data.min;
+                    scope.form[ctrl.$name].minValue = data.min;
+                }
 
-                //ctrl.$render();
-                isInnerChange = true;
-                //elem.attr('compiled', true);
-                //$compile(elem)(scope);
+                $timeout(function() {
+                    ctrl.$setViewValue(data.default.toString());
+                    ctrl.$render();
+                }, 0);
 
-                ctrl.$setViewValue(data.default.toString());
-                ctrl.$render();
 
             };
-
-            $timeout(function() {
-                // Get init values
-                var data = parentCtrl.init();
-                // Init the controls with values
-                ctrl.set(data);
-            }, 0);
 
             /*
              * Listen to changes on price field and update the pips accordingly
              */
-            scope.$watch(attrs.ngModel, function (newVal, oldVal) {
-
-                $timeout(function () {
-
-                    if (newVal && newVal != oldVal && !isInnerChange && ctrl.$valid) {
-                        parentCtrl.pipsChanged(newVal, ctrl);
-                    }
-
-                    isInnerChange = false;
-
-                }, 0);
-
+            elem.on('change', function(e) {
+                parentCtrl.pipsChanged(ctrl.$modelValue, ctrl);
             });
 
         }
