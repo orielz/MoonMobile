@@ -93,7 +93,7 @@
                 var action = $parse($attrs.action)($scope);
                 var orderType = $parse($attrs.orderType)($scope);
                 var entryPrice = $parse($attrs.entryPriceModel)($scope);
-                var component = $parse($attrs.component)($scope);
+                var component = $attrs.component;
                 var baseRate = orderType != 'Market' ? entryPrice : (action == 'Sell' ? rate.Bid : rate.Ask);
                 var isPlusOperation = action == 'Sell' && component == 'stoploss';
 

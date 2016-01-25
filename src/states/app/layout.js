@@ -11,8 +11,11 @@
             .state('app', {
                 abstract: true,
                 templateUrl: 'states/app/layout.html',
+                controller: 'LayoutController',
+                controllerAs: 'layout',
                 resolve: {
                     init: ['userDataService', 'signalRService', 'ratesService', 'openPositionsService', function (userDataService, signalRService, ratesService, openPositionsService) {
+
 
                         return userDataService.getUserData()
                             .then(function() {

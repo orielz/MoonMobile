@@ -54,7 +54,7 @@
             restrictionsService.buildRestrictions({
                 BrokerID: broker.brokerID,
                 ProductID: constants.EP.mobileProductId,
-                LocationsIDs:21
+                LocationsIDs: 21
             });
 
             var translationPromise = translationService.getTranslations({
@@ -69,7 +69,7 @@
 
                 });
 
-        }
+        };
 
     }
 

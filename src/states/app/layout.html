@@ -1,6 +1,26 @@
-<header>
-    <top-bar></top-bar>
-    <menu-bar></menu-bar>
-</header>
+<!--<header>-->
+    <!--<top-bar></top-bar>-->
+    <!--<menu-bar></menu-bar>-->
+<!--</header>-->
 
-<div ui-view></div>
+<title-bar></title-bar>
+
+<div class="off-canvas-wrapper" ng-init="layout.layoutInitialized()">
+    <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+        <div class="off-canvas position-left" id="offCanvasLeft" data-off-canvas>
+
+            <ul>
+                <li>
+                    <i class="fa fa-line-chart"></i>
+                    <h3>TRADING</h3>
+                </li>
+            </ul>
+
+
+        </div>
+        <div class="off-canvas position-right" id="offCanvasRight" data-off-canvas data-position="right">KFIR KFIR KFIR KFIR KFIR KFIR KFIR KFIR KFIR KFIR KFIR KFIR </div>
+        <div class="off-canvas-content" data-off-canvas-content>
+            <div ui-view></div>
+        </div>
+    </div>
+</div>
