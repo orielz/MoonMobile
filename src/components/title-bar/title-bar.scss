@@ -1,0 +1,18 @@
+@import '../../../node_modules/foundation-sites/scss/util/util';
+
+.title-bar {
+
+  div.money-icon {
+    width: rem-calc(19);
+    height: rem-calc(19);
+    background: url("../../assets/images/money-bag.png") no-repeat;
+    background-size: rem-calc(19) rem-calc(19);
+    cursor: pointer;
+  }
+
+  i.fa.fa-bell-o {
+    font-size: rem-calc(19);
+    cursor: pointer;
+  }
+
+}

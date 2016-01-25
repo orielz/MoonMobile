@@ -1,0 +1,9 @@
+.title-bar div.money-icon {
+  width: 1.1875rem;
+  height: 1.1875rem;
+  background: url("../../assets/images/money-bag.png") no-repeat;
+  background-size: 1.1875rem 1.1875rem;
+  cursor: pointer; }
+.title-bar i.fa.fa-bell-o {
+  font-size: 1.1875rem;
+  cursor: pointer; }

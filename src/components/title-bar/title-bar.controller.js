@@ -3,9 +3,9 @@
  */
 (function(app) {
 
-    app.controller('TopBarController', [TopBar]);
+    app.controller('TitleBarController', ['$scope', TitleBar]);
 
-    function TopBar() {
+    function TitleBar($scope) {
 
     }
 
