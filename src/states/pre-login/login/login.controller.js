@@ -3,9 +3,9 @@
  */
 (function (app) {
 
-    app.controller('LoginController', ['authService', '$state', 'loginService', 'attributesService', 'constants', 'translationService', '$q', 'restrictionsService', LoginController]);
+    app.controller('LoginController', ['authService', '$state', 'loginService', 'attributesService', 'constants', 'translationService', '$q', 'restrictionsService', 'navbarService', LoginController]);
 
-    function LoginController(authService, $state, loginService, attributesService, constants, translationService, $q, restrictionsService) {
+    function LoginController(authService, $state, loginService, attributesService, constants, translationService, $q, restrictionsService, navbarService) {
 
         var vm = this;
         vm.credentials = {};
@@ -49,6 +49,8 @@
             var attributesPromise = attributesService.getGroupAttributes({
                 BrokerID: broker.brokerID,
                 ProductID: constants.EP.mobileProductId
+            }).then(function(attributes) {
+                navbarService.buildSideBar(attributes);
             });
 
             restrictionsService.buildRestrictions({
