@@ -3,9 +3,9 @@
  */
 (function (app) {
 
-    app.controller('RatesController', ['$scope', '$log', 'ratesModel', RatesController]);
+    app.controller('SymbolsController', ['$scope', '$log', 'ratesModel', SymbolsController]);
 
-    function RatesController($scope, $log, ratesModel) {
+    function SymbolsController($scope, $log, ratesModel) {
 
         activate();
 

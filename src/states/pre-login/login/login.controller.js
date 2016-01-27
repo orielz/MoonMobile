@@ -37,7 +37,7 @@
         };
 
         function authSuccess() {
-            $state.go('rates');
+            $state.go('symbols');
         }
 
         function authFailed(err) {

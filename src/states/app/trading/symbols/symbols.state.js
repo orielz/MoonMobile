@@ -8,15 +8,15 @@
     function appRoutes($stateProvider) {
 
         $stateProvider
-            .state('rates', {
+            .state('symbols', {
             parent: 'trading',
-            url: '/rates',
-            templateUrl: 'states/app/trading/rates/rates.html',
-            controller: 'RatesController',
-            controllerAs: 'Rates'
+            url: '/symbols',
+            templateUrl: 'states/app/trading/symbols/symbols.html',
+            controller: 'SymbolsController',
+            controllerAs: 'symbols'
         }).state('order', {
             url: '/order/{InstrumentID}/{type}/{isEdit}',
-            templateUrl: 'states/app/trading/rates/order/order.html',
+            templateUrl: 'states/app/trading/symbols/order/order.html',
             controller: 'OrderController',
             controllerAs: 'order'
         })
