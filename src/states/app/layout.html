@@ -7,18 +7,10 @@
 
 <div class="off-canvas-wrapper" ng-init="layout.layoutInitialized()">
     <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
-        <div class="off-canvas position-left" id="offCanvasLeft" data-off-canvas>
-
-            <ul>
-                <li>
-                    <i class="fa fa-line-chart"></i>
-                    <h3>TRADING</h3>
-                </li>
-            </ul>
-
-
+        <div class="off-canvas position-left full-height" id="offCanvasLeft" data-off-canvas>
+            <nav-bar></nav-bar>
         </div>
-        <div class="off-canvas position-right" id="offCanvasRight" data-off-canvas data-position="right">KFIR KFIR KFIR KFIR KFIR KFIR KFIR KFIR KFIR KFIR KFIR KFIR </div>
+        <div class="off-canvas position-right full-height" id="offCanvasRight" data-off-canvas data-position="right">KFIR KFIR KFIR KFIR KFIR KFIR KFIR KFIR KFIR KFIR KFIR KFIR </div>
         <div class="off-canvas-content" data-off-canvas-content>
             <div ui-view></div>
         </div>

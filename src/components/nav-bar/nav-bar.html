@@ -1,0 +1,45 @@
+<ul class="navigation-list no-padding no-margin">
+
+    <!-- Trading -->
+    <li ng-if="nav.model.trading.length > 0" class="first-level trading">
+        trading
+    </li>
+    <li ng-if="nav.model.trading.length > 0" ng-repeat="item in nav.model.trading" class="second-level">
+        <a ui-sref="{{::item.name}}" ui-sref-active="active">{{::item.translationKey}}</a>
+    </li>
+
+    <!-- Strategies -->
+    <li ng-if="nav.model.strategies.length > 0" class="first-level strategies">
+        strategies
+    </li>
+    <li ng-if="nav.model.strategies.length > 0" ng-repeat="item in nav.model.strategies" class="second-level">
+        <a ui-sref="{{::item.name}}" ui-sref-active="active">{{::item.translationKey}}</a>
+    </li>
+
+    <!-- My Account -->
+    <li ng-if="nav.model.myAccount.length > 0" class="first-level myaccount">
+        my account
+    </li>
+    <li ng-if="nav.model.myAccount.length > 0" ng-repeat="item in nav.model.myAccount" class="second-level">
+        <a ui-sref="{{::item.name}}" ui-sref-active="active">{{::item.translationKey}}</a>
+    </li>
+
+    <!-- Settings -->
+    <li class="first-level settings">
+        settings
+    </li>
+
+    <!-- Help -->
+    <li ng-if="nav.model.help.length > 0" class="first-level help">
+        Help
+    </li>
+    <li ng-if="nav.model.help.length > 0" ng-repeat="item in nav.model.help" class="second-level">
+        <a ui-sref="{{::item.name}}" ui-sref-active="active">{{::item.translationKey}}</a>
+    </li>
+
+    <!-- Logout -->
+    <li class="first-level logout">
+        logout
+    </li>
+
+</ul>

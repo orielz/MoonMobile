@@ -27,17 +27,20 @@
             var helpPrefix = "HELP_";
             var attributes = attributes.GroupAttributes;
 
-            for (var attr in attributes) {
+            for (var name in attributes) {
 
-                if (!attributes.hasOwnProperty(attr)) {
+                if (!attributes.hasOwnProperty(name)) {
                     continue;
                 }
 
-                var attribute = attributes[attr];
+                var attribute = attributes[name];
 
-                if (_.endsWith(attr, subTabPrefix))
-                    addTabToModel(attribute);
-                else if (_.startsWith(attr, helpPrefix))
+                if (_.endsWith(name, subTabPrefix)) {
+                    var name = Object.keys(attribute["AttributeValue"])[0];
+                    var model = attribute["AttributeValue"][name];
+                    addTabToModel(name, model);
+                }
+                else if (_.startsWith(name, helpPrefix))
                     addHelpToModel(attribute);
 
             }
@@ -48,25 +51,22 @@
          * @param attribute - {object} the attribute from attributes json that end with "_SUBTABS"
          * @return undefined
          */
-        function addTabToModel(attribute) {
+        function addTabToModel(parentName, model) {
 
-            attribute = attribute["AttributeValue"];
+            navBarModel[parentName] = [];
 
             // Iterate over the sent attribute
-            for (var attr in attribute) {
+            for (var childName in model) {
 
-                navBarModel[attr] = [];
-                var subTabs = attribute[attr];
+                var tab = model[childName];
 
-                for (var prop in subTabs) {
+                var item = {
+                    name: childName,
+                    translationKey: tab.translateKey,
+                    order: tab.order
+                };
 
-                    var item = {
-                        name: subTabs[prop].translateKey,
-                        order: subTabs[prop].order
-                    };
-
-                    navBarModel[attr].push(item);
-                }
+                navBarModel[parentName].push(item);
             }
         }
 
@@ -79,6 +79,7 @@
 
             var item = {
                 name: attribute.AttributeName,
+                translationKey: attribute.AttributeName,
                 value: attribute.AttributeValue
             };
 
