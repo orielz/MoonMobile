@@ -1,0 +1,39 @@
+.navigation-list {
+  color: #9ca1bc;
+  list-style-type: none; }
+  .navigation-list li a.active {
+    color: #fefefe;
+    font-weight: bold; }
+  .navigation-list .first-level {
+    padding-left: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: 1.2rem;
+    text-transform: uppercase; }
+    .navigation-list .first-level::before {
+      content: '';
+      background-repeat: no-repeat;
+      background-size: 2rem;
+      padding-left: 2.5rem;
+      padding-right: 0.5rem;
+      background-position-y: 4px; }
+    .navigation-list .first-level.trading::before {
+      background-image: url("../../assets/images/trading-icon.png"); }
+    .navigation-list .first-level.strategies::before {
+      background-image: url("../../assets/images/strategies-icon.png"); }
+    .navigation-list .first-level.myaccount::before {
+      background-image: url("../../assets/images/myaccount-icon.png"); }
+    .navigation-list .first-level.settings::before {
+      background-image: url("../../assets/images/settings-icon.png"); }
+    .navigation-list .first-level.help::before {
+      background-image: url("../../assets/images/help-icon.png"); }
+    .navigation-list .first-level.logout::before {
+      background-image: url("../../assets/images/logout-icon.png"); }
+  .navigation-list .second-level {
+    padding-left: 4rem;
+    padding-bottom: 0.5rem;
+    text-transform: capitalize; }
+  .navigation-list .third-level {
+    padding-left: 6rem;
+    padding-bottom: 0.5rem;
+    text-transform: capitalize; }

@@ -1,8 +1,10 @@
 <section class="padding-top rates full-height">
+
     <div class="row">
-            <div class="small-12 columns">
-                <input type="text" placeholder="Search for a symbol"/>
-            </div>
+        <div class="small-12 columns">
+            <input type="text" placeholder="Search for a symbol" ng-model="query" />
+        </div>
     </div>
-    <div symbol-list></div>
+
+    <div symbol-list filter="query"></div>
 </section>

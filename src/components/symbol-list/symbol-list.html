@@ -1,5 +1,6 @@
 <ul class="symbol-list">
-    <li ng-repeat="item in model" class="row">
+
+    <li ng-repeat="item in model | objectsFilter:'InstrumentName':filter" class="row">
 
         <div class="small-12 columns padding-top-quarter">
 

@@ -10,7 +10,9 @@
         return {
             restrict: 'A',
             templateUrl: 'components/symbol-list/symbol-list.html',
-            scope: {},
+            scope: {
+                filter: '='
+            },
             link: link
         };
 
